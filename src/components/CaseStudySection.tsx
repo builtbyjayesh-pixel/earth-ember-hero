@@ -49,16 +49,15 @@ const CaseStudySection = () => {
     goToSlide(prev);
   }, [currentSlide, slides.length, goToSlide]);
 
+  // Pottery-inspired texture layers
+  const paperTexture = `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04' numOctaves='5' result='noise'/%3E%3CfeDiffuseLighting in='noise' lighting-color='%23f5f0e8' surfaceScale='2'%3E%3CfeDistantLight azimuth='45' elevation='60'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)'/%3E%3C/svg%3E")`;
+  
+  const clayGrain = `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E")`;
+
+  const organicWash = `url("data:image/svg+xml,%3Csvg viewBox='0 0 600 600' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='organic'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.008' numOctaves='3' result='turbulence'/%3E%3CfeDisplacementMap in2='turbulence' in='SourceGraphic' scale='15' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3Ccircle cx='300' cy='300' r='280' fill='%23d4c4b0' opacity='0.12' filter='url(%23organic)'/%3E%3Ccircle cx='150' cy='450' r='200' fill='%23c9b8a3' opacity='0.08' filter='url(%23organic)'/%3E%3Ccircle cx='480' cy='180' r='180' fill='%23e0d5c7' opacity='0.06' filter='url(%23organic)'/%3E%3C/svg%3E")`;
+
   return (
     <section className="relative h-screen w-screen overflow-hidden">
-      {/* Grain texture overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none z-10"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        }}
-      />
-
       {/* Slides container */}
       <div 
         className="flex h-full transition-transform duration-[800ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
@@ -72,8 +71,47 @@ const CaseStudySection = () => {
             key={slide.label}
             className={`relative flex-shrink-0 w-screen h-screen ${slide.bg}`}
           >
+            {/* Paper texture base layer */}
+            <div 
+              className="absolute inset-0 opacity-[0.35] mix-blend-multiply pointer-events-none"
+              style={{ backgroundImage: paperTexture, backgroundSize: '400px 400px' }}
+            />
+            
+            {/* Organic watercolor-like wash */}
+            <div 
+              className="absolute inset-0 opacity-100 pointer-events-none"
+              style={{ backgroundImage: organicWash, backgroundSize: 'cover' }}
+            />
+            
+            {/* Fine clay grain overlay */}
+            <div 
+              className="absolute inset-0 opacity-[0.04] pointer-events-none"
+              style={{ backgroundImage: clayGrain }}
+            />
+            
+            {/* Subtle vignette for depth */}
+            <div 
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: 'radial-gradient(ellipse at center, transparent 0%, transparent 50%, rgba(180, 160, 140, 0.08) 100%)'
+              }}
+            />
+            
+            {/* Soft edge aging effect */}
+            <div 
+              className="absolute inset-0 pointer-events-none opacity-60"
+              style={{
+                background: `
+                  linear-gradient(180deg, rgba(200, 180, 160, 0.06) 0%, transparent 8%),
+                  linear-gradient(0deg, rgba(190, 170, 150, 0.05) 0%, transparent 6%),
+                  linear-gradient(90deg, rgba(195, 175, 155, 0.04) 0%, transparent 4%),
+                  linear-gradient(270deg, rgba(185, 165, 145, 0.04) 0%, transparent 4%)
+                `
+              }}
+            />
+
             {/* Content wrapper */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center px-8 lg:px-16">
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-8 lg:px-16 z-10">
               {/* Label */}
               <span 
                 className={`font-sans text-[11px] tracking-[0.5em] uppercase text-foreground/50 mb-8 lg:mb-12 transition-all duration-700 delay-200 ${
@@ -110,7 +148,7 @@ const CaseStudySection = () => {
             </div>
 
             {/* Slide number */}
-            <div className="absolute bottom-8 left-8 lg:bottom-12 lg:left-12">
+            <div className="absolute bottom-8 left-8 lg:bottom-12 lg:left-12 z-10">
               <span className="font-sans text-xs tracking-wider text-foreground/30">
                 {String(index + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
               </span>
