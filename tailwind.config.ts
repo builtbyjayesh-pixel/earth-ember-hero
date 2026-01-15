@@ -13,7 +13,35 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
       colors: {
+        terracotta: {
+          50: "hsl(30 35% 96%)",
+          100: "hsl(28 30% 90%)",
+          200: "hsl(25 35% 80%)",
+          300: "hsl(20 40% 70%)",
+          400: "hsl(18 45% 60%)",
+          500: "hsl(18 45% 55%)",
+          600: "hsl(16 45% 45%)",
+          700: "hsl(14 40% 35%)",
+          800: "hsl(12 35% 25%)",
+          900: "hsl(10 30% 18%)",
+        },
+        clay: {
+          50: "hsl(35 25% 95%)",
+          100: "hsl(32 22% 88%)",
+          200: "hsl(30 20% 78%)",
+          300: "hsl(28 18% 65%)",
+          400: "hsl(26 16% 50%)",
+          500: "hsl(25 20% 35%)",
+        },
+        sage: {
+          400: "hsl(75 15% 45%)",
+          500: "hsl(75 18% 38%)",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
