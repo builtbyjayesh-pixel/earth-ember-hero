@@ -70,7 +70,7 @@ const HeroSection = () => {
                 <img
                   src={potteryHero}
                   alt="Hand-painted pottery vase"
-                  className="w-full h-full object-cover saturate-[0.95] contrast-[0.95]"
+                  className="w-full h-full object-cover saturate-[0.92] contrast-[0.93]"
                 />
 
                 {/* Edge fade */}
