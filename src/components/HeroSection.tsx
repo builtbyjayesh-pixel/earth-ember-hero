@@ -69,7 +69,7 @@ const HeroSection = () => {
               <div className="relative h-full overflow-hidden">
                 <img
                   src={potteryHero}
-                  alt="Handcrafted terracotta and cream pottery vase on natural linen"
+                  alt="Hand-painted pottery vase with Van Gogh Starry Night design"
                   className="w-full h-full object-cover"
                 />
                 
