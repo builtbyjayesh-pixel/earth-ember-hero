@@ -5,10 +5,23 @@ const HeroSection = () => {
   return (
     <section className="relative h-screen bg-background overflow-hidden">
       
-      {/* Subtle terracotta wash */}
+      {/* Base warm wash */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: "var(--gradient-terracotta)" }}
+      />
+
+      {/* Subtle paper / clay texture */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.25]"
+        style={{
+          backgroundImage: `
+            radial-gradient(rgba(200,180,160,0.12) 1px, transparent 1px),
+            radial-gradient(rgba(200,180,160,0.08) 1px, transparent 1px)
+          `,
+          backgroundSize: "120px 120px, 180px 180px",
+          backgroundPosition: "0 0, 40px 60px",
+        }}
       />
 
       <div className="container mx-auto h-full px-6 lg:px-16">
@@ -45,26 +58,24 @@ const HeroSection = () => {
 
           {/* IMAGE */}
           <div className="order-1 lg:order-2 flex justify-center">
-            <div className="relative w-full max-w-sm lg:max-w-md xl:max-w-lg">
+            <div className="relative w-full max-w-xs lg:max-w-sm xl:max-w-md">
 
-              {/* Background blend glow */}
-              <div className="absolute -inset-12 
-                bg-[radial-gradient(ellipse_at_center,rgba(210,190,170,0.35),transparent_70%)] 
+              {/* Soft blend glow */}
+              <div className="absolute -inset-10 
+                bg-[radial-gradient(ellipse_at_center,rgba(210,190,170,0.3),transparent_70%)] 
                 blur-3xl pointer-events-none"
               />
 
-              {/* Image */}
               <div className="relative aspect-[3/4] overflow-hidden">
                 <img
                   src={potteryHero}
                   alt="Hand-painted pottery vase"
-                  className="w-full h-full object-cover 
-                             saturate-[0.95] contrast-[0.95]"
+                  className="w-full h-full object-cover saturate-[0.95] contrast-[0.95]"
                 />
 
-                {/* Edge fade for seamless blend */}
+                {/* Edge fade */}
                 <div className="absolute inset-0 
-                  bg-gradient-to-t from-background/30 via-transparent to-background/15 
+                  bg-gradient-to-t from-background/35 via-transparent to-background/20 
                   pointer-events-none"
                 />
               </div>
