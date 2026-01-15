@@ -5,7 +5,7 @@ const HeroSection = () => {
   return (
     <section className="relative h-screen bg-background overflow-hidden">
       
-      {/* Base warm wash */}
+      {/* Warm base wash */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ background: "var(--gradient-terracotta)" }}
@@ -13,14 +13,14 @@ const HeroSection = () => {
 
       {/* Subtle paper / clay texture */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.25]"
+        className="absolute inset-0 pointer-events-none opacity-[0.22]"
         style={{
           backgroundImage: `
             radial-gradient(rgba(200,180,160,0.12) 1px, transparent 1px),
             radial-gradient(rgba(200,180,160,0.08) 1px, transparent 1px)
           `,
-          backgroundSize: "120px 120px, 180px 180px",
-          backgroundPosition: "0 0, 40px 60px",
+          backgroundSize: "140px 140px, 220px 220px",
+          backgroundPosition: "0 0, 60px 80px",
         }}
       />
 
@@ -29,7 +29,6 @@ const HeroSection = () => {
 
           {/* TEXT */}
           <div className="max-w-xl order-2 lg:order-1 text-center lg:text-left">
-            
             <p className="font-sans text-[11px] tracking-[0.35em] uppercase text-muted-foreground mb-8">
               Handmade with intention
             </p>
@@ -61,22 +60,22 @@ const HeroSection = () => {
             <div className="relative w-full max-w-xs lg:max-w-sm xl:max-w-md">
 
               {/* Soft blend glow */}
-              <div className="absolute -inset-10 
+              <div className="absolute -inset-12 
                 bg-[radial-gradient(ellipse_at_center,rgba(210,190,170,0.3),transparent_70%)] 
                 blur-3xl pointer-events-none"
               />
 
-              <div className="relative aspect-[3/4] overflow-hidden">
+              {/* Image container */}
+              <div className="relative aspect-[3/4] overflow-hidden rounded-[2px]">
                 <img
                   src={potteryHero}
                   alt="Hand-painted pottery vase"
-                  className="w-full h-full object-cover saturate-[0.92] contrast-[0.93]"
+                  className="w-full h-full object-cover saturate-[0.95] contrast-[0.95]"
                 />
 
-                {/* Edge fade */}
-                <div className="absolute inset-0 
-                  bg-gradient-to-t from-background/35 via-transparent to-background/20 
-                  pointer-events-none"
+                {/* Edge fade for seamless blend */}
+                <div className="absolute inset-0 pointer-events-none
+                  bg-gradient-to-t from-background/35 via-transparent to-background/20"
                 />
               </div>
             </div>
