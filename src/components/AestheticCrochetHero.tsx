@@ -19,7 +19,7 @@ const AestheticCrochetHero = () => {
         <div className="flex flex-col md:flex-row items-center gap-16 md:gap-24">
           
           {/* Text Content */}
-          <div className="flex-1 text-center md:text-left space-y-8">
+          <div className="flex-1 text-center md:text-left space-y-10">
             <p 
               className="text-[#B8998A] text-xs tracking-[0.25em] uppercase"
               style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500 }}
@@ -28,7 +28,7 @@ const AestheticCrochetHero = () => {
             </p>
             
             <h1 
-              className="text-4xl md:text-5xl lg:text-[3.5rem] text-[#5C4A42] leading-[1.15]"
+              className="text-[2.75rem] md:text-[3.5rem] lg:text-[4.25rem] text-[#5C4A42] leading-[1.25]"
               style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}
             >
               Slow-made pieces,<br />
@@ -36,13 +36,13 @@ const AestheticCrochetHero = () => {
             </h1>
             
             <p 
-              className="text-[#9B8B84] text-base leading-[1.8] max-w-sm mx-auto md:mx-0"
+              className="text-[#9B8B84] text-[1.0625rem] leading-[1.9] max-w-xs mx-auto md:mx-0"
               style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400 }}
             >
               Each stitch carries intention. Our handmade crochet pieces are crafted slowly, thoughtfully — made to be treasured.
             </p>
             
-            <div className="pt-6">
+            <div className="pt-4">
               <button 
                 className="group text-[#5C4A42] text-sm tracking-wide transition-all duration-300 border-b border-[#C4A99A] pb-1 hover:border-[#5C4A42]"
                 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500 }}
@@ -58,14 +58,14 @@ const AestheticCrochetHero = () => {
             <div className="relative">
               {/* Soft organic shadow */}
               <div 
-                className="absolute -inset-6 bg-gradient-to-br from-[#D4B8A8]/30 via-[#C4A090]/20 to-transparent rounded-[3rem] blur-3xl transform rotate-2"
+                className="absolute -inset-5 bg-gradient-to-br from-[#D4B8A8]/30 via-[#C4A090]/20 to-transparent rounded-[3rem] blur-3xl transform rotate-2"
               />
               
               {/* Warm edge glow */}
               <div className="absolute -inset-1 bg-gradient-to-br from-[#F5E8E0] to-[#EDE0D6] rounded-[2rem] opacity-80" />
               
-              {/* Main image container */}
-              <div className="relative w-72 h-80 md:w-80 md:h-[22rem] lg:w-[22rem] lg:h-[26rem] rounded-[1.5rem] overflow-hidden">
+              {/* Main image container - reduced ~8% */}
+              <div className="relative w-64 h-72 md:w-72 md:h-80 lg:w-80 lg:h-96 rounded-[1.5rem] overflow-hidden">
                 <img 
                   src={crochetBag} 
                   alt="Handmade crochet bag with butterfly design" 
