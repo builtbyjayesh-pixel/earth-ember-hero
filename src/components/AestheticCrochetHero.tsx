@@ -28,7 +28,7 @@ const AestheticCrochetHero = () => {
             </p>
             
             <h1 
-              className="text-[#5C4A42]"
+              className="text-[#3D2E28]"
               style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
               <span 
@@ -38,7 +38,7 @@ const AestheticCrochetHero = () => {
                 Slow-made pieces,
               </span>
               <span 
-                className="block text-[2.75rem] md:text-[3.75rem] lg:text-[4.5rem] text-[#9B7B6B] italic leading-[1.15] mt-2 md:mt-3"
+                className="block text-[2.75rem] md:text-[3.75rem] lg:text-[4.5rem] text-[#7D5A4A] italic leading-[1.15] mt-2 md:mt-3"
                 style={{ fontWeight: 400 }}
               >
                 woven with care
@@ -46,7 +46,7 @@ const AestheticCrochetHero = () => {
             </h1>
             
             <p 
-              className="text-[#9B8B84] text-[1.0625rem] leading-[1.9] max-w-xs mx-auto md:mx-0"
+              className="text-[#6B5B55] text-[1.0625rem] leading-[1.9] max-w-xs mx-auto md:mx-0"
               style={{ fontFamily: "'Inter', sans-serif", fontWeight: 400 }}
             >
               Each stitch carries intention. Our handmade crochet pieces are crafted slowly, thoughtfully — made to be treasured.
@@ -54,7 +54,7 @@ const AestheticCrochetHero = () => {
             
             <div className="pt-4">
               <button 
-                className="group text-[#5C4A42] text-sm tracking-wide transition-all duration-300 border-b border-[#C4A99A] pb-1 hover:border-[#5C4A42]"
+                className="group text-[#3D2E28] text-sm tracking-wide transition-all duration-300 border-b border-[#B8998A] pb-1 hover:border-[#3D2E28]"
                 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500 }}
               >
                 Explore the Collection
