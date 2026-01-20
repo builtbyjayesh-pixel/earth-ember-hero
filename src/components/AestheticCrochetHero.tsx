@@ -28,11 +28,21 @@ const AestheticCrochetHero = () => {
             </p>
             
             <h1 
-              className="text-[2.75rem] md:text-[3.5rem] lg:text-[4.25rem] text-[#5C4A42] leading-[1.25]"
-              style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 400 }}
+              className="text-[#5C4A42]"
+              style={{ fontFamily: "'Cormorant Garamond', serif" }}
             >
-              Slow-made pieces,<br />
-              <span className="text-[#9B7B6B] italic">woven with care</span>
+              <span 
+                className="block text-[2.5rem] md:text-[3.25rem] lg:text-[4rem] leading-[1.1] tracking-[-0.01em]"
+                style={{ fontWeight: 300 }}
+              >
+                Slow-made pieces,
+              </span>
+              <span 
+                className="block text-[2.75rem] md:text-[3.75rem] lg:text-[4.5rem] text-[#9B7B6B] italic leading-[1.15] mt-2 md:mt-3"
+                style={{ fontWeight: 400 }}
+              >
+                woven with care
+              </span>
             </h1>
             
             <p 
@@ -65,7 +75,7 @@ const AestheticCrochetHero = () => {
               <div className="absolute -inset-1 bg-gradient-to-br from-[#F5E8E0] to-[#EDE0D6] rounded-[2rem] opacity-80" />
               
               {/* Main image container - reduced ~8% */}
-              <div className="relative w-64 h-72 md:w-72 md:h-80 lg:w-80 lg:h-96 rounded-[1.5rem] overflow-hidden">
+              <div className="relative w-72 h-80 md:w-80 md:h-[22rem] lg:w-[24rem] lg:h-[28rem] rounded-[1.75rem] overflow-hidden">
                 <img 
                   src={crochetBag} 
                   alt="Handmade crochet bag with butterfly design" 
