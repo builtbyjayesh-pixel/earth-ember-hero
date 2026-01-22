@@ -1,5 +1,6 @@
-import crochetBag from "@/assets/crochet-bag.jpg";
-import potteryHero from "@/assets/pottery-hero.jpg";
+import gokuLineArt from "@/assets/DBZ Goku Line Art Men’s Black Crew Neck Tee.jfif";
+import dragonBallHub from "@/assets/Dragon Ball Z Hub.jfif";
+import vegetaMajin from "@/assets/Vegeta Dragon Ball Z T-Shirt.jfif";
 
 type ProductCard = {
   name: string;
@@ -10,22 +11,22 @@ type ProductCard = {
 
 const products: ProductCard[] = [
   {
-    name: "Vegeta Tee",
-    description: "Clean graphic, everyday fit.",
-    imageSrc: crochetBag,
-    imageAlt: "Vegeta Dragon Ball Z T-shirt product photo",
+    name: "Goku — Base Form",
+    description: "Minimal symbol print.",
+    imageSrc: dragonBallHub,
+    imageAlt: "Goku base form Dragon Ball Z t-shirt product image",
   },
   {
-    name: "Dragon Ball Hub",
-    description: "A calm, central collage look.",
-    imageSrc: potteryHero,
-    imageAlt: "Dragon Ball Z hub graphic product image",
+    name: "Goku — Super Saiyan",
+    description: "Clean line-art illustration.",
+    imageSrc: gokuLineArt,
+    imageAlt: "Goku Super Saiyan line art black crew neck t-shirt",
   },
   {
-    name: "Goku Line Art Tee",
-    description: "Minimal line art on black.",
-    imageSrc: crochetBag,
-    imageAlt: "Goku line art black crew neck tee product photo",
+    name: "Vegeta — Majin Arc",
+    description: "High-contrast graphic.",
+    imageSrc: vegetaMajin,
+    imageAlt: "Vegeta Majin form Dragon Ball Z t-shirt product image",
   },
 ];
 
@@ -61,7 +62,9 @@ export default function ProductSelectionGrid() {
               </div>
 
               <div className="mt-6 flex flex-1 flex-col">
-                <h3 className="font-sans text-lg font-medium leading-snug text-foreground">{p.name}</h3>
+                <h3 className="font-sans text-lg font-medium leading-snug text-foreground">
+                  {p.name}
+                </h3>
                 <p className="mt-2 font-sans text-sm leading-relaxed text-muted-foreground">
                   {p.description}
                 </p>
