@@ -30,19 +30,21 @@ const products: ProductCard[] = [
   },
 ];
 
-
 export default function ProductSelectionGrid() {
   return (
-    <section aria-labelledby="product-grid-heading" className="bg-muted/30">
+    <section
+      aria-labelledby="product-grid-heading"
+      className="bg-neutral-950"
+    >
       <div className="mx-auto w-full max-w-6xl px-6 py-16 md:py-20">
         <header className="max-w-2xl">
           <h2
             id="product-grid-heading"
-            className="font-sans text-3xl leading-tight tracking-tight text-foreground md:text-4xl"
+            className="font-sans text-3xl leading-tight tracking-tight text-neutral-100 md:text-4xl"
           >
             All designs. Choose your form.
           </h2>
-          <p className="mt-3 font-sans text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="mt-3 font-sans text-base leading-relaxed text-neutral-400 md:text-lg">
             Dragon Ball T-shirts
           </p>
         </header>
@@ -51,9 +53,9 @@ export default function ProductSelectionGrid() {
           {products.map((p) => (
             <article
               key={p.name}
-              className="flex flex-col rounded-2xl border border-border bg-background p-6"
+              className="flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900 p-6"
             >
-              <div className="overflow-hidden rounded-xl border border-border">
+              <div className="overflow-hidden rounded-xl border border-neutral-800/60">
                 <img
                   src={p.imageSrc}
                   alt={p.imageAlt}
@@ -63,18 +65,18 @@ export default function ProductSelectionGrid() {
               </div>
 
               <div className="mt-6 flex flex-1 flex-col">
-                <h3 className="font-sans text-lg font-medium leading-snug text-foreground">
+                <h3 className="font-sans text-lg font-normal leading-snug text-neutral-100">
                   {p.name}
                 </h3>
-                <p className="mt-2 font-sans text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-2 font-sans text-sm leading-relaxed text-neutral-400">
                   {p.description}
                 </p>
                 <div className="mt-6">
                   <button
                     type="button"
-                    className="inline-flex items-center justify-center rounded-full border border-border bg-transparent px-4 py-2 font-sans text-sm font-medium text-foreground/80"
+                    className="inline-flex items-center justify-center rounded-full border border-neutral-700 bg-transparent px-4 py-2 font-sans text-sm font-medium text-neutral-300"
                   >
-                    View details
+                    View
                   </button>
                 </div>
               </div>
