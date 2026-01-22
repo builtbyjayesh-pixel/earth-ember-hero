@@ -36,7 +36,7 @@ export default function ProductSelectionGrid() {
       aria-labelledby="product-grid-heading"
       className="bg-neutral-950"
     >
-      <div className="mx-auto w-full max-w-6xl px-6 py-16 md:py-20">
+      <div className="mx-auto w-full max-w-6xl px-6 py-20 md:py-28">
         <header className="max-w-2xl">
           <h2
             id="product-grid-heading"
@@ -49,32 +49,32 @@ export default function ProductSelectionGrid() {
           </p>
         </header>
 
-        <div className="mt-10 grid grid-cols-1 gap-8 md:mt-12 md:grid-cols-3 md:gap-10">
+        <div className="mt-14 grid grid-cols-1 gap-12 md:grid-cols-3">
           {products.map((p) => (
-            <article
-              key={p.name}
-              className="flex flex-col rounded-2xl border border-neutral-800 bg-neutral-900 p-6"
-            >
-              <div className="overflow-hidden rounded-xl border border-neutral-800/60">
+            <article key={p.name} className="flex flex-col">
+              {/* Image */}
+              <div className="overflow-hidden rounded-2xl">
                 <img
                   src={p.imageSrc}
                   alt={p.imageAlt}
                   loading="lazy"
-                  className="aspect-square w-full object-cover"
+                  className="aspect-square w-full object-contain"
                 />
               </div>
 
-              <div className="mt-6 flex flex-1 flex-col">
+              {/* Text */}
+              <div className="mt-6">
                 <h3 className="font-sans text-lg font-normal leading-snug text-neutral-100">
                   {p.name}
                 </h3>
                 <p className="mt-2 font-sans text-sm leading-relaxed text-neutral-400">
                   {p.description}
                 </p>
-                <div className="mt-6">
+
+                <div className="mt-5">
                   <button
                     type="button"
-                    className="inline-flex items-center justify-center rounded-full border border-neutral-700 bg-transparent px-4 py-2 font-sans text-sm font-medium text-neutral-300"
+                    className="inline-flex items-center justify-center rounded-full border border-neutral-700 px-4 py-2 font-sans text-sm font-medium text-neutral-300"
                   >
                     View
                   </button>
