@@ -73,7 +73,7 @@ export default function ProductSelectionGrid() {
               {/* Image */}
               <div
                 className={`rounded-2xl bg-neutral-100 ${
-                  p.isHero ? "p-7" : "p-6"
+                  p.isHero ? "p-3" : "p-3"
                 }`}
               >
                 <img
