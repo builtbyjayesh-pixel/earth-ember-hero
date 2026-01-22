@@ -80,7 +80,7 @@ export default function ProductSelectionGrid() {
                   src={p.imageSrc}
                   alt={p.imageAlt}
                   loading="lazy"
-                  className="aspect-square w-full object-contain"
+                  className="w-full max-h-[320px] object-contain mx-auto"
                 />
               </div>
 
