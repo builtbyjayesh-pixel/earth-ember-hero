@@ -1,6 +1,6 @@
-import gokuLineArt from "@/assets/DBZ Goku Line Art Men’s Black Crew Neck Tee.jfif";
-import dragonBallHub from "@/assets/Dragon Ball Z Hub.jfif";
-import vegetaMajin from "@/assets/Vegeta Dragon Ball Z T-Shirt.jfif";
+import gokuBase from "@/assets/goku-base-form.jpg";
+import gokuLineArt from "@/assets/goku-line-art.jpg";
+import vegetaMajin from "@/assets/vegeta-majin.jpg";
 
 type ProductCard = {
   name: string;
@@ -13,22 +13,23 @@ const products: ProductCard[] = [
   {
     name: "Goku — Base Form",
     description: "Minimal symbol print.",
-    imageSrc: dragonBallHub,
-    imageAlt: "Goku base form Dragon Ball Z t-shirt product image",
+    imageSrc: gokuBase,
+    imageAlt: "Goku base form Dragon Ball Z t-shirt",
   },
   {
     name: "Goku — Super Saiyan",
     description: "Clean line-art illustration.",
     imageSrc: gokuLineArt,
-    imageAlt: "Goku Super Saiyan line art black crew neck t-shirt",
+    imageAlt: "Goku Super Saiyan line art t-shirt",
   },
   {
     name: "Vegeta — Majin Arc",
     description: "High-contrast graphic.",
     imageSrc: vegetaMajin,
-    imageAlt: "Vegeta Majin form Dragon Ball Z t-shirt product image",
+    imageAlt: "Vegeta Majin form Dragon Ball Z t-shirt",
   },
 ];
+
 
 export default function ProductSelectionGrid() {
   return (
