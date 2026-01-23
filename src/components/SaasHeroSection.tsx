@@ -4,7 +4,7 @@ const SaasHeroSection = () => {
   return (
     <section className="relative w-full min-h-[100svh] overflow-hidden flex items-center justify-center">
       
-      {/* Background (unchanged, safe) */}
+      {/* Background */}
       <div className="absolute inset-0">
         <div
           className="absolute inset-0"
@@ -26,21 +26,28 @@ const SaasHeroSection = () => {
         }}
       />
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 md:px-14 lg:px-20 py-24 md:py-32 flex flex-col items-center">
+      {/* Content wrapper (desktop crop tightened here) */}
+      <div className="relative z-10 w-full max-w-[1100px] mx-auto px-6 md:px-14 lg:px-20 flex flex-col items-center">
         
         {/* Eyebrow */}
         <span
-          className="block text-white/40 text-[10px] tracking-[0.35em] uppercase mb-10 text-center"
+          className="block text-white/45 text-[10px] tracking-[0.35em] uppercase mb-10 text-center"
           style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
         >
           Enterprise system
         </span>
 
         {/* Glass Hero */}
-        <div className="relative w-full max-w-4xl">
+        <div
+          className="
+            relative w-full max-w-4xl
+            md:translate-y-[5vh]
+          "
+        >
           <div
-            className="relative rounded-[28px] md:rounded-[40px] overflow-hidden"
+            className="
+              relative rounded-[28px] md:rounded-[40px] overflow-hidden
+            "
             style={{
               background:
                 'linear-gradient(155deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.06) 35%, rgba(255,255,255,0.02) 70%, rgba(255,255,255,0.08) 100%)',
@@ -76,9 +83,16 @@ const SaasHeroSection = () => {
             />
 
             {/* Content */}
-            <div className="px-12 py-20 md:px-20 md:py-28 lg:px-28 lg:py-32 text-center">
+            <div
+              className="
+                px-12 py-20
+                md:px-20 md:py-28
+                lg:px-28 lg:py-32
+                text-center
+              "
+            >
               <h1
-                className="text-white/95 text-3xl md:text-4xl lg:text-5xl font-light tracking-tight mb-6"
+                className="text-white text-3xl md:text-4xl lg:text-5xl font-light tracking-tight mb-6"
                 style={{
                   fontFamily: 'system-ui, -apple-system, sans-serif',
                   lineHeight: 1.15,
@@ -88,11 +102,34 @@ const SaasHeroSection = () => {
               </h1>
 
               <p
-                className="text-white/50 text-sm md:text-base tracking-wide"
+                className="text-white/60 text-sm md:text-base tracking-wide mb-10"
                 style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
               >
                 Clear structure. Predictable behavior.
               </p>
+
+              {/* CTA */}
+              <div className="flex justify-center">
+                <button
+                  className="
+                    px-6 py-3
+                    md:px-6 md:py-3
+                    lg:px-7 lg:py-3
+                    rounded-full
+                    text-white/85 text-sm
+                    border border-white/25
+                    hover:border-white/45
+                    hover:text-white
+                    transition-all
+                    backdrop-blur-md
+                  "
+                  style={{
+                    background: 'rgba(255,255,255,0.03)',
+                  }}
+                >
+                  Request access
+                </button>
+              </div>
             </div>
 
             {/* Bottom edge */}
