@@ -1,4 +1,4 @@
-import saasBg from '@/assets/download (1).jpg';
+import saasBg from '@/assets/saas-hero-bg.jpg';
 
 const SaasHeroSection = () => {
   return (
