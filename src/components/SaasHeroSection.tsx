@@ -1,96 +1,141 @@
 const SaasHeroSection = () => {
   return (
-    <section className="relative w-full min-h-screen bg-[#1a1d24] overflow-hidden">
-      {/* Subtle tonal depth layer */}
+    <section className="relative w-full min-h-screen bg-[#12151a] overflow-hidden flex items-center justify-center">
+      {/* Subtle ambient lighting */}
       <div 
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse 80% 60% at 50% 40%, #22262f 0%, #1a1d24 100%)'
+          background: 'radial-gradient(ellipse 100% 80% at 60% 30%, #1a1e26 0%, #12151a 70%)'
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-32">
-        {/* Editorial header */}
-        <div className="mb-16 md:mb-24">
-          <p 
-            className="text-[#6b7280] text-xs tracking-[0.2em] uppercase mb-4"
-            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
-          >
-            Enterprise Platform
-          </p>
-          <h1 
-            className="text-[#e5e7eb] text-3xl md:text-5xl lg:text-6xl font-light leading-[1.15] max-w-3xl"
-            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
-          >
-            Infrastructure that scales
-            <br />
-            <span className="text-[#9ca3af]">with your ambition</span>
-          </h1>
-        </div>
+      {/* Very subtle floor reflection */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-1/3"
+        style={{
+          background: 'linear-gradient(to top, rgba(255,255,255,0.01) 0%, transparent 100%)'
+        }}
+      />
 
-        {/* Main content area - desktop landscape, mobile portrait */}
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-start">
-          
-          {/* Glass Command Slab - the focal point */}
-          <div className="w-full lg:w-2/3 order-2 lg:order-1">
-            <div 
-              className="relative rounded-sm overflow-hidden"
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 py-16 md:py-24">
+        {/* Glass Command Slab - the primary hero object */}
+        <div 
+          className="relative ml-0 md:ml-[8%] lg:ml-[12%]"
+          style={{ perspective: '2000px' }}
+        >
+          {/* Main glass panel */}
+          <div 
+            className="relative rounded-[2px] overflow-visible"
+            style={{
+              transform: 'rotateX(2deg) rotateY(-1deg)',
+              transformStyle: 'preserve-3d',
+            }}
+          >
+            {/* Glass body with enhanced depth */}
+            <div
+              className="relative"
               style={{
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%)',
-                backdropFilter: 'blur(40px)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                background: 'linear-gradient(165deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 30%, rgba(255,255,255,0.02) 100%)',
+                backdropFilter: 'blur(60px)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                borderRadius: '2px',
                 boxShadow: `
-                  0 0 0 1px rgba(255,255,255,0.05),
-                  0 20px 60px -20px rgba(0,0,0,0.5),
-                  inset 0 1px 0 rgba(255,255,255,0.1),
-                  inset 0 -1px 0 rgba(0,0,0,0.2)
+                  0 0 0 1px rgba(255,255,255,0.08),
+                  0 50px 100px -30px rgba(0,0,0,0.7),
+                  0 30px 60px -20px rgba(0,0,0,0.5),
+                  inset 0 1px 0 rgba(255,255,255,0.2),
+                  inset 0 -1px 0 rgba(0,0,0,0.3),
+                  inset 1px 0 0 rgba(255,255,255,0.08),
+                  inset -1px 0 0 rgba(0,0,0,0.2)
                 `
               }}
             >
-              {/* Top edge highlight for 3D depth */}
+              {/* Top edge - sharp highlight for 3D thickness */}
               <div 
-                className="absolute top-0 left-0 right-0 h-px"
+                className="absolute -top-[3px] left-0 right-0 h-[3px] rounded-t-[2px]"
                 style={{
-                  background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)'
+                  background: 'linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 100%)',
+                  boxShadow: '0 -1px 2px rgba(255,255,255,0.1)'
                 }}
               />
-              
+
+              {/* Left edge - thickness simulation */}
+              <div 
+                className="absolute top-0 -left-[3px] bottom-0 w-[3px]"
+                style={{
+                  background: 'linear-gradient(90deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.15) 100%)',
+                }}
+              />
+
+              {/* Right edge - shadow side */}
+              <div 
+                className="absolute top-0 -right-[3px] bottom-0 w-[3px]"
+                style={{
+                  background: 'linear-gradient(90deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%)',
+                }}
+              />
+
+              {/* Bottom edge - heavy shadow */}
+              <div 
+                className="absolute -bottom-[3px] left-0 right-0 h-[3px]"
+                style={{
+                  background: 'linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%)',
+                }}
+              />
+
+              {/* Internal refraction highlight */}
+              <div 
+                className="absolute top-0 left-0 right-0 h-32 pointer-events-none"
+                style={{
+                  background: 'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 100%)',
+                  borderRadius: '2px 2px 0 0'
+                }}
+              />
+
+              {/* Diagonal light streak - refraction effect */}
+              <div 
+                className="absolute top-0 right-0 w-1/3 h-full pointer-events-none opacity-30"
+                style={{
+                  background: 'linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.03) 50%, transparent 60%)',
+                }}
+              />
+
               {/* Glass slab content */}
-              <div className="p-6 md:p-10">
-                {/* Command bar */}
+              <div className="p-8 md:p-12 lg:p-16">
+                {/* Minimal header bar */}
                 <div 
-                  className="flex items-center gap-3 mb-8 pb-6"
+                  className="flex items-center gap-3 mb-10 pb-6"
                   style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
                 >
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#4ade80]/60" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#fbbf24]/60" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#f87171]/60" />
+                  <div className="w-2 h-2 rounded-full bg-[#4ade80]/70" />
+                  <div className="w-2 h-2 rounded-full bg-[#fbbf24]/70" />
+                  <div className="w-2 h-2 rounded-full bg-[#f87171]/70" />
                   <div className="flex-1" />
                   <span 
-                    className="text-[#6b7280] text-xs"
+                    className="text-[#4b5563] text-[10px] tracking-wider"
                     style={{ fontFamily: 'ui-monospace, monospace' }}
                   >
-                    v2.4.1
+                    SYSTEM v2.4.1
                   </span>
                 </div>
 
-                {/* Dashboard grid */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
+                {/* Metrics grid - dense on mobile */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 mb-10">
                   {[
                     { label: 'Active Users', value: '24.8K' },
                     { label: 'Uptime', value: '99.98%' },
                     { label: 'Response', value: '12ms' },
                     { label: 'Regions', value: '14' },
                   ].map((stat, i) => (
-                    <div key={i} className="text-left">
+                    <div key={i}>
                       <p 
-                        className="text-[#6b7280] text-xs mb-1"
+                        className="text-[#4b5563] text-[10px] tracking-wider uppercase mb-2"
                         style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
                       >
                         {stat.label}
                       </p>
                       <p 
-                        className="text-[#e5e7eb] text-xl md:text-2xl font-light"
+                        className="text-[#e5e7eb] text-2xl md:text-3xl font-extralight tracking-tight"
                         style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
                       >
                         {stat.value}
@@ -100,102 +145,62 @@ const SaasHeroSection = () => {
                 </div>
 
                 {/* Status rows */}
-                <div className="space-y-3">
+                <div className="space-y-2">
                   {[
-                    { name: 'API Gateway', status: 'Operational', latency: '8ms' },
-                    { name: 'Database Cluster', status: 'Operational', latency: '3ms' },
-                    { name: 'Edge Network', status: 'Operational', latency: '12ms' },
+                    { name: 'API Gateway', latency: '8ms' },
+                    { name: 'Database Cluster', latency: '3ms' },
+                    { name: 'Edge Network', latency: '12ms' },
+                    { name: 'Auth Service', latency: '5ms' },
                   ].map((service, i) => (
                     <div 
                       key={i}
-                      className="flex items-center justify-between py-3 px-4 rounded-sm"
+                      className="flex items-center justify-between py-4 px-5"
                       style={{ 
                         background: 'rgba(255,255,255,0.02)',
-                        border: '1px solid rgba(255,255,255,0.04)'
+                        border: '1px solid rgba(255,255,255,0.03)'
                       }}
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#4ade80]" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-[#4ade80]/80" />
                         <span 
-                          className="text-[#d1d5db] text-sm"
+                          className="text-[#d1d5db] text-sm font-light"
                           style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
                         >
                           {service.name}
                         </span>
                       </div>
-                      <div className="flex items-center gap-6">
-                        <span 
-                          className="text-[#6b7280] text-xs hidden md:block"
-                          style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
-                        >
-                          {service.status}
-                        </span>
-                        <span 
-                          className="text-[#9ca3af] text-xs"
-                          style={{ fontFamily: 'ui-monospace, monospace' }}
-                        >
-                          {service.latency}
-                        </span>
-                      </div>
+                      <span 
+                        className="text-[#6b7280] text-xs"
+                        style={{ fontFamily: 'ui-monospace, monospace' }}
+                      >
+                        {service.latency}
+                      </span>
                     </div>
                   ))}
                 </div>
+
+                {/* Compact secondary row - visible on larger screens */}
+                <div 
+                  className="hidden md:flex items-center justify-between mt-10 pt-6 text-[10px] text-[#4b5563]"
+                  style={{ 
+                    borderTop: '1px solid rgba(255,255,255,0.04)',
+                    fontFamily: 'system-ui, -apple-system, sans-serif'
+                  }}
+                >
+                  <span className="tracking-wider">LAST SYNC: 2 SEC AGO</span>
+                  <span className="tracking-wider">ALL SYSTEMS NOMINAL</span>
+                </div>
               </div>
-
-              {/* Bottom edge shadow for 3D depth */}
-              <div 
-                className="absolute bottom-0 left-0 right-0 h-px"
-                style={{
-                  background: 'rgba(0,0,0,0.3)'
-                }}
-              />
-            </div>
-          </div>
-
-          {/* Supporting solid UI - secondary */}
-          <div className="w-full lg:w-1/3 order-1 lg:order-2 space-y-6">
-            <div>
-              <p 
-                className="text-[#9ca3af] text-sm leading-relaxed mb-6"
-                style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
-              >
-                A unified control plane for your entire infrastructure. 
-                Monitor, deploy, and scale with precision.
-              </p>
             </div>
 
-            {/* Solid action buttons */}
-            <div className="space-y-3">
-              <button 
-                className="w-full py-3 px-5 rounded-sm text-sm text-[#1a1d24] bg-[#e5e7eb] hover:bg-[#d1d5db] transition-colors text-left"
-                style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
-              >
-                Request access
-              </button>
-              <button 
-                className="w-full py-3 px-5 rounded-sm text-sm text-[#9ca3af] hover:text-[#e5e7eb] transition-colors text-left"
-                style={{ 
-                  fontFamily: 'system-ui, -apple-system, sans-serif',
-                  border: '1px solid rgba(255,255,255,0.1)'
-                }}
-              >
-                View documentation
-              </button>
-            </div>
-
-            {/* Minimal metadata */}
+            {/* Subtle ambient shadow beneath */}
             <div 
-              className="pt-6 mt-6"
-              style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
-            >
-              <div className="flex items-center gap-4 text-xs text-[#6b7280]" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                <span>SOC 2</span>
-                <span>•</span>
-                <span>GDPR</span>
-                <span>•</span>
-                <span>ISO 27001</span>
-              </div>
-            </div>
+              className="absolute -bottom-8 left-[10%] right-[10%] h-16 -z-10"
+              style={{
+                background: 'radial-gradient(ellipse 100% 100% at 50% 0%, rgba(0,0,0,0.4) 0%, transparent 70%)',
+                filter: 'blur(20px)'
+              }}
+            />
           </div>
         </div>
       </div>
