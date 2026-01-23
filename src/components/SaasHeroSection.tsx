@@ -1,206 +1,252 @@
+import saasBg from '@/assets/saas-bg.jpg';
+
 const SaasHeroSection = () => {
   return (
-    <section className="relative w-full min-h-screen bg-[#12151a] overflow-hidden flex items-center justify-center">
-      {/* Subtle ambient lighting */}
+    <section className="relative w-full min-h-screen overflow-hidden flex items-center justify-center">
+      {/* Cinematic abstract background */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url(${saasBg})`,
+        }}
+      />
+      
+      {/* Subtle dark overlay for depth */}
       <div 
         className="absolute inset-0"
         style={{
-          background: 'radial-gradient(ellipse 100% 80% at 60% 30%, #1a1e26 0%, #12151a 70%)'
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.4) 100%)'
         }}
       />
 
-      {/* Very subtle floor reflection */}
-      <div 
-        className="absolute bottom-0 left-0 right-0 h-1/3"
-        style={{
-          background: 'linear-gradient(to top, rgba(255,255,255,0.01) 0%, transparent 100%)'
-        }}
-      />
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-32">
+        {/* Content wrapper - off-center for editorial tension */}
+        <div className="flex flex-col items-center md:items-start md:ml-[5%] lg:ml-[8%]">
+          
+          {/* Eyebrow */}
+          <span 
+            className="text-white/50 text-[10px] md:text-[11px] tracking-[0.3em] uppercase mb-6 md:mb-8"
+            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+          >
+            Enterprise System
+          </span>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12 py-16 md:py-24">
-        {/* Glass Command Slab - the primary hero object */}
-        <div 
-          className="relative ml-0 md:ml-[8%] lg:ml-[12%]"
-          style={{ perspective: '2000px' }}
-        >
-          {/* Main glass panel */}
-          <div 
-            className="relative rounded-[2px] overflow-visible"
-            style={{
-              transform: 'rotateX(2deg) rotateY(-1deg)',
-              transformStyle: 'preserve-3d',
+          {/* Primary headline */}
+          <h2 
+            className="text-white text-3xl md:text-4xl lg:text-5xl font-light tracking-tight mb-4 text-center md:text-left max-w-2xl"
+            style={{ 
+              fontFamily: 'system-ui, -apple-system, sans-serif',
+              lineHeight: 1.15
             }}
           >
-            {/* Glass body with enhanced depth */}
-            <div
+            A system designed to hold up under scale
+          </h2>
+
+          {/* Secondary line */}
+          <p 
+            className="text-white/60 text-base md:text-lg font-light tracking-wide mb-16 md:mb-20 text-center md:text-left"
+            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+          >
+            Clear structure. Predictable behavior.
+          </p>
+
+          {/* Liquid Glass Element - the dominant hero object */}
+          <div 
+            className="relative w-full max-w-4xl"
+            style={{ perspective: '2500px' }}
+          >
+            {/* Main liquid glass panel */}
+            <div 
               className="relative"
               style={{
-                background: 'linear-gradient(165deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 30%, rgba(255,255,255,0.02) 100%)',
-                backdropFilter: 'blur(60px)',
-                border: '1px solid rgba(255,255,255,0.15)',
-                borderRadius: '2px',
-                boxShadow: `
-                  0 0 0 1px rgba(255,255,255,0.08),
-                  0 50px 100px -30px rgba(0,0,0,0.7),
-                  0 30px 60px -20px rgba(0,0,0,0.5),
-                  inset 0 1px 0 rgba(255,255,255,0.2),
-                  inset 0 -1px 0 rgba(0,0,0,0.3),
-                  inset 1px 0 0 rgba(255,255,255,0.08),
-                  inset -1px 0 0 rgba(0,0,0,0.2)
-                `
+                transform: 'rotateX(1deg) rotateY(-0.5deg)',
+                transformStyle: 'preserve-3d',
               }}
             >
-              {/* Top edge - sharp highlight for 3D thickness */}
+              {/* Outer glow - warm refraction from background */}
               <div 
-                className="absolute -top-[3px] left-0 right-0 h-[3px] rounded-t-[2px]"
+                className="absolute -inset-1 rounded-[24px] md:rounded-[32px] opacity-40"
                 style={{
-                  background: 'linear-gradient(180deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.1) 100%)',
-                  boxShadow: '0 -1px 2px rgba(255,255,255,0.1)'
+                  background: 'linear-gradient(135deg, rgba(255,140,100,0.2) 0%, rgba(100,150,255,0.15) 50%, rgba(255,180,120,0.1) 100%)',
+                  filter: 'blur(20px)'
                 }}
               />
 
-              {/* Left edge - thickness simulation */}
-              <div 
-                className="absolute top-0 -left-[3px] bottom-0 w-[3px]"
+              {/* Glass body with liquid effect */}
+              <div
+                className="relative rounded-[20px] md:rounded-[28px] overflow-hidden"
                 style={{
-                  background: 'linear-gradient(90deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.15) 100%)',
+                  background: 'linear-gradient(145deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 25%, rgba(255,255,255,0.04) 60%, rgba(255,255,255,0.12) 100%)',
+                  backdropFilter: 'blur(40px) saturate(1.4)',
+                  WebkitBackdropFilter: 'blur(40px) saturate(1.4)',
+                  boxShadow: `
+                    0 0 0 1px rgba(255,255,255,0.2),
+                    0 0 0 2px rgba(255,255,255,0.05),
+                    inset 0 2px 20px rgba(255,255,255,0.15),
+                    inset 0 -2px 20px rgba(0,0,0,0.1),
+                    0 60px 120px -40px rgba(0,0,0,0.5),
+                    0 30px 60px -30px rgba(0,0,0,0.3)
+                  `
                 }}
-              />
-
-              {/* Right edge - shadow side */}
-              <div 
-                className="absolute top-0 -right-[3px] bottom-0 w-[3px]"
-                style={{
-                  background: 'linear-gradient(90deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.4) 100%)',
-                }}
-              />
-
-              {/* Bottom edge - heavy shadow */}
-              <div 
-                className="absolute -bottom-[3px] left-0 right-0 h-[3px]"
-                style={{
-                  background: 'linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%)',
-                }}
-              />
-
-              {/* Internal refraction highlight */}
-              <div 
-                className="absolute top-0 left-0 right-0 h-32 pointer-events-none"
-                style={{
-                  background: 'linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 100%)',
-                  borderRadius: '2px 2px 0 0'
-                }}
-              />
-
-              {/* Diagonal light streak - refraction effect */}
-              <div 
-                className="absolute top-0 right-0 w-1/3 h-full pointer-events-none opacity-30"
-                style={{
-                  background: 'linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.03) 50%, transparent 60%)',
-                }}
-              />
-
-              {/* Glass slab content */}
-              <div className="p-8 md:p-12 lg:p-16">
-                {/* Minimal header bar */}
+              >
+                {/* Top edge highlight - liquid glass thickness */}
                 <div 
-                  className="flex items-center gap-3 mb-10 pb-6"
-                  style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
-                >
-                  <div className="w-2 h-2 rounded-full bg-[#4ade80]/70" />
-                  <div className="w-2 h-2 rounded-full bg-[#fbbf24]/70" />
-                  <div className="w-2 h-2 rounded-full bg-[#f87171]/70" />
-                  <div className="flex-1" />
-                  <span 
-                    className="text-[#4b5563] text-[10px] tracking-wider"
-                    style={{ fontFamily: 'ui-monospace, monospace' }}
+                  className="absolute top-0 left-4 right-4 h-[2px]"
+                  style={{
+                    background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 20%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0.5) 80%, transparent 100%)',
+                    borderRadius: '999px'
+                  }}
+                />
+
+                {/* Internal refraction - warm light from background */}
+                <div 
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(ellipse 80% 50% at 30% 20%, rgba(255,180,140,0.08) 0%, transparent 50%)',
+                  }}
+                />
+
+                {/* Cool refraction on opposite side */}
+                <div 
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(ellipse 60% 40% at 80% 70%, rgba(120,160,255,0.06) 0%, transparent 50%)',
+                  }}
+                />
+
+                {/* Edge highlight - left side */}
+                <div 
+                  className="absolute left-0 top-8 bottom-8 w-[1px]"
+                  style={{
+                    background: 'linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.3) 30%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.3) 70%, transparent 100%)',
+                  }}
+                />
+
+                {/* Edge highlight - right side (softer) */}
+                <div 
+                  className="absolute right-0 top-8 bottom-8 w-[1px]"
+                  style={{
+                    background: 'linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.15) 30%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.15) 70%, transparent 100%)',
+                  }}
+                />
+
+                {/* Glass slab content */}
+                <div className="p-8 md:p-12 lg:p-16">
+                  {/* Minimal system indicator */}
+                  <div 
+                    className="flex items-center gap-3 mb-10 pb-6"
+                    style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}
                   >
-                    SYSTEM v2.4.1
-                  </span>
-                </div>
-
-                {/* Metrics grid - dense on mobile */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 mb-10">
-                  {[
-                    { label: 'Active Users', value: '24.8K' },
-                    { label: 'Uptime', value: '99.98%' },
-                    { label: 'Response', value: '12ms' },
-                    { label: 'Regions', value: '14' },
-                  ].map((stat, i) => (
-                    <div key={i}>
-                      <p 
-                        className="text-[#4b5563] text-[10px] tracking-wider uppercase mb-2"
-                        style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
-                      >
-                        {stat.label}
-                      </p>
-                      <p 
-                        className="text-[#e5e7eb] text-2xl md:text-3xl font-extralight tracking-tight"
-                        style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
-                      >
-                        {stat.value}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Status rows */}
-                <div className="space-y-2">
-                  {[
-                    { name: 'API Gateway', latency: '8ms' },
-                    { name: 'Database Cluster', latency: '3ms' },
-                    { name: 'Edge Network', latency: '12ms' },
-                    { name: 'Auth Service', latency: '5ms' },
-                  ].map((service, i) => (
-                    <div 
-                      key={i}
-                      className="flex items-center justify-between py-4 px-5"
-                      style={{ 
-                        background: 'rgba(255,255,255,0.02)',
-                        border: '1px solid rgba(255,255,255,0.03)'
-                      }}
+                    <div className="w-2.5 h-2.5 rounded-full" style={{ background: 'rgba(120,255,180,0.8)' }} />
+                    <span 
+                      className="text-white/40 text-[10px] tracking-[0.2em] uppercase"
+                      style={{ fontFamily: 'ui-monospace, monospace' }}
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#4ade80]/80" />
-                        <span 
-                          className="text-[#d1d5db] text-sm font-light"
+                      System Active
+                    </span>
+                    <div className="flex-1" />
+                    <span 
+                      className="text-white/30 text-[10px] tracking-wider"
+                      style={{ fontFamily: 'ui-monospace, monospace' }}
+                    >
+                      v2.4.1
+                    </span>
+                  </div>
+
+                  {/* Metrics grid */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 mb-10">
+                    {[
+                      { label: 'Active Users', value: '24.8K' },
+                      { label: 'Uptime', value: '99.98%' },
+                      { label: 'Response', value: '12ms' },
+                      { label: 'Regions', value: '14' },
+                    ].map((stat, i) => (
+                      <div key={i}>
+                        <p 
+                          className="text-white/40 text-[10px] tracking-[0.15em] uppercase mb-2"
                           style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
                         >
-                          {service.name}
+                          {stat.label}
+                        </p>
+                        <p 
+                          className="text-white/90 text-2xl md:text-3xl font-extralight tracking-tight"
+                          style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+                        >
+                          {stat.value}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Status rows */}
+                  <div className="space-y-2">
+                    {[
+                      { name: 'API Gateway', latency: '8ms' },
+                      { name: 'Database Cluster', latency: '3ms' },
+                      { name: 'Edge Network', latency: '12ms' },
+                      { name: 'Auth Service', latency: '5ms' },
+                    ].map((service, i) => (
+                      <div 
+                        key={i}
+                        className="flex items-center justify-between py-4 px-5 rounded-lg"
+                        style={{ 
+                          background: 'rgba(255,255,255,0.04)',
+                          border: '1px solid rgba(255,255,255,0.06)'
+                        }}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div 
+                            className="w-1.5 h-1.5 rounded-full" 
+                            style={{ background: 'rgba(120,255,180,0.9)' }}
+                          />
+                          <span 
+                            className="text-white/80 text-sm font-light"
+                            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
+                          >
+                            {service.name}
+                          </span>
+                        </div>
+                        <span 
+                          className="text-white/40 text-xs"
+                          style={{ fontFamily: 'ui-monospace, monospace' }}
+                        >
+                          {service.latency}
                         </span>
                       </div>
-                      <span 
-                        className="text-[#6b7280] text-xs"
-                        style={{ fontFamily: 'ui-monospace, monospace' }}
-                      >
-                        {service.latency}
-                      </span>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+
+                  {/* Footer row */}
+                  <div 
+                    className="flex items-center justify-between mt-10 pt-6 text-[10px] text-white/30"
+                    style={{ 
+                      borderTop: '1px solid rgba(255,255,255,0.06)',
+                      fontFamily: 'system-ui, -apple-system, sans-serif'
+                    }}
+                  >
+                    <span className="tracking-[0.15em]">LAST SYNC: 2 SEC AGO</span>
+                    <span className="tracking-[0.15em] hidden md:block">ALL SYSTEMS NOMINAL</span>
+                  </div>
                 </div>
 
-                {/* Compact secondary row - visible on larger screens */}
+                {/* Bottom edge subtle shadow */}
                 <div 
-                  className="hidden md:flex items-center justify-between mt-10 pt-6 text-[10px] text-[#4b5563]"
-                  style={{ 
-                    borderTop: '1px solid rgba(255,255,255,0.04)',
-                    fontFamily: 'system-ui, -apple-system, sans-serif'
+                  className="absolute bottom-0 left-4 right-4 h-[1px]"
+                  style={{
+                    background: 'linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.2) 20%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.2) 80%, transparent 100%)',
                   }}
-                >
-                  <span className="tracking-wider">LAST SYNC: 2 SEC AGO</span>
-                  <span className="tracking-wider">ALL SYSTEMS NOMINAL</span>
-                </div>
+                />
               </div>
-            </div>
 
-            {/* Subtle ambient shadow beneath */}
-            <div 
-              className="absolute -bottom-8 left-[10%] right-[10%] h-16 -z-10"
-              style={{
-                background: 'radial-gradient(ellipse 100% 100% at 50% 0%, rgba(0,0,0,0.4) 0%, transparent 70%)',
-                filter: 'blur(20px)'
-              }}
-            />
+              {/* Ambient reflection beneath glass */}
+              <div 
+                className="absolute -bottom-12 left-[5%] right-[5%] h-20 -z-10"
+                style={{
+                  background: 'radial-gradient(ellipse 100% 100% at 50% 0%, rgba(255,180,140,0.15) 0%, transparent 60%)',
+                  filter: 'blur(25px)'
+                }}
+              />
+            </div>
           </div>
         </div>
       </div>
