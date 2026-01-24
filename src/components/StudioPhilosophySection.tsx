@@ -12,7 +12,7 @@ const StudioPhilosophySection = () => {
       const viewportHeight = window.innerHeight;
       const containerHeight = containerRef.current.offsetHeight;
 
-      const start = viewportHeight * 0.25;
+      const start = viewportHeight * 0.3;
       const scrolled = -rect.top + start;
       const total = containerHeight - viewportHeight + start;
 
@@ -26,8 +26,8 @@ const StudioPhilosophySection = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Subtle glyph movement
-  const glyphOffset = scrollProgress * 16;
+  // Subtle vertical movement
+  const glyphOffset = scrollProgress * 14;
 
   return (
     <section
@@ -35,19 +35,37 @@ const StudioPhilosophySection = () => {
       className="relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
-      {/* Continuous background gradient */}
+      {/* Base gradient */}
       <div
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 -z-20"
         style={{
           background: `
             linear-gradient(
               to bottom,
-              #5b0f0f 0%,
-              #7a1a1a 40%,
-              #9c3a3a 70%,
+              #5a0f0f 0%,
+              #7b1c1c 45%,
+              #a14a4a 75%,
               #f4efe8 100%
             )
           `,
+        }}
+      />
+
+      {/* Top vignette */}
+      <div
+        className="absolute inset-0 -z-10 pointer-events-none"
+        style={{
+          background:
+            'linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0) 35%)',
+        }}
+      />
+
+      {/* Bottom vignette */}
+      <div
+        className="absolute inset-0 -z-10 pointer-events-none"
+        style={{
+          background:
+            'linear-gradient(to top, rgba(0,0,0,0.18), rgba(0,0,0,0) 35%)',
         }}
       />
 
@@ -56,30 +74,31 @@ const StudioPhilosophySection = () => {
         className="absolute inset-0 -z-10 pointer-events-none"
         style={{
           backgroundImage:
-            'repeating-linear-gradient(0deg, rgba(255,255,255,0.025), rgba(255,255,255,0.025) 1px, transparent 1px, transparent 2px)',
-          opacity: 0.3,
+            'repeating-linear-gradient(0deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 1px, transparent 1px, transparent 2px)',
+          opacity: 0.35,
           mixBlendMode: 'overlay',
         }}
       />
 
-      {/* Vertical notch glyph */}
+      {/* Structural glyph */}
       <div
         className="absolute pointer-events-none z-10"
         style={{
-          left: '12%',
-          top: `calc(28vh + ${glyphOffset}vh)`,
-          width: '3px',
-          height: '18vh',
+          left: '11%',
+          top: `calc(32vh + ${glyphOffset}vh)`,
+          width: '4px',
+          height: '14vh',
           background: '#f5f0e8',
         }}
       >
+        {/* Offset notch */}
         <div
           className="absolute"
           style={{
-            top: '38%',
-            left: '-9px',
-            width: '20px',
-            height: '12%',
+            top: '42%',
+            left: '-10px',
+            width: '22px',
+            height: '10%',
             background: '#f5f0e8',
           }}
         />
@@ -87,12 +106,12 @@ const StudioPhilosophySection = () => {
 
       {/* Section 1 */}
       <div className="min-h-[120vh] flex items-center">
-        <div className="max-w-[34rem] px-10 lg:ml-[28%]">
+        <div className="max-w-[36rem] px-10 lg:ml-[28%]">
           <p
             className="
               text-4xl md:text-5xl lg:text-6xl
               font-light
-              leading-[1.15]
+              leading-[1.25]
               tracking-[-0.02em]
               text-[#f5f0e8]
             "
@@ -106,12 +125,12 @@ const StudioPhilosophySection = () => {
 
       {/* Section 2 */}
       <div className="min-h-[110vh] flex items-center">
-        <div className="max-w-[34rem] px-10 lg:ml-[28%]">
+        <div className="max-w-[36rem] px-10 lg:ml-[28%]">
           <p
             className="
               text-4xl md:text-5xl lg:text-6xl
               font-light
-              leading-[1.15]
+              leading-[1.25]
               tracking-[-0.02em]
               text-[#f5f0e8]
             "
