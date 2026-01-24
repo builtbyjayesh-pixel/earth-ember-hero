@@ -2,145 +2,137 @@ import { useEffect, useRef, useState } from 'react';
 
 const StudioPhilosophySection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const blocksCount = 5;
 
   useEffect(() => {
-    const handleScroll = () => {
+    const onScroll = () => {
       if (!containerRef.current) return;
 
-      const rect = containerRef.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const containerHeight = containerRef.current.offsetHeight;
+      const blocks = containerRef.current.querySelectorAll('[data-block]');
+      const viewportCenter = window.innerHeight * 0.5;
 
-      const start = viewportHeight * 0.3;
-      const scrolled = -rect.top + start;
-      const total = containerHeight - viewportHeight + start;
+      let closestIndex = 0;
+      let minDistance = Infinity;
 
-      const progress = Math.max(0, Math.min(1, scrolled / total));
-      setScrollProgress(progress);
+      blocks.forEach((block, i) => {
+        const rect = block.getBoundingClientRect();
+        const blockCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(blockCenter - viewportCenter);
+
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestIndex = i;
+        }
+      });
+
+      setActiveIndex(closestIndex);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Subtle vertical movement
-  const glyphOffset = scrollProgress * 14;
+  const glyphTop = `calc(20vh + ${activeIndex * 12}vh)`;
+
+  const TextBlock = ({
+    children,
+    index,
+  }: {
+    children: React.ReactNode;
+    index: number;
+  }) => {
+    const isActive = index === activeIndex;
+
+    return (
+      <div
+        data-block
+        className="transition-all duration-500"
+        style={{
+          opacity: isActive ? 1 : 0.35,
+          filter: isActive ? 'blur(0px)' : 'blur(1px)',
+        }}
+      >
+        {children}
+      </div>
+    );
+  };
 
   return (
     <section
       ref={containerRef}
       className="relative overflow-hidden"
-      style={{ isolation: 'isolate' }}
+      style={{
+        background:
+          'radial-gradient(120% 80% at 50% 30%, #8f1d1d 0%, #5c0f0f 45%, #3a0b0b 100%)',
+      }}
     >
-      {/* Base gradient */}
+      {/* Glyph */}
       <div
-        className="absolute inset-0 -z-20"
+        className="absolute left-1/2 -translate-x-[220px] z-10 pointer-events-none"
         style={{
-          background: `
-            linear-gradient(
-              to bottom,
-              #5a0f0f 0%,
-              #7b1c1c 45%,
-              #a14a4a 75%,
-              #f4efe8 100%
-            )
-          `,
-        }}
-      />
-
-      {/* Top vignette */}
-      <div
-        className="absolute inset-0 -z-10 pointer-events-none"
-        style={{
-          background:
-            'linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0) 35%)',
-        }}
-      />
-
-      {/* Bottom vignette */}
-      <div
-        className="absolute inset-0 -z-10 pointer-events-none"
-        style={{
-          background:
-            'linear-gradient(to top, rgba(0,0,0,0.18), rgba(0,0,0,0) 35%)',
-        }}
-      />
-
-      {/* Subtle grain */}
-      <div
-        className="absolute inset-0 -z-10 pointer-events-none"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(0deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 1px, transparent 1px, transparent 2px)',
-          opacity: 0.35,
-          mixBlendMode: 'overlay',
-        }}
-      />
-
-      {/* Structural glyph */}
-      <div
-        className="absolute pointer-events-none z-10"
-        style={{
-          left: '11%',
-          top: `calc(32vh + ${glyphOffset}vh)`,
-          width: '4px',
-          height: '14vh',
-          background: '#f5f0e8',
+          top: glyphTop,
+          transition: 'top 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
       >
-        {/* Offset notch */}
         <div
-          className="absolute"
           style={{
-            top: '42%',
-            left: '-10px',
-            width: '22px',
-            height: '10%',
-            background: '#f5f0e8',
+            width: '2px',
+            height: '56px',
+            background: 'rgba(255,255,255,0.85)',
+            position: 'relative',
           }}
-        />
-      </div>
-
-      {/* Section 1 */}
-      <div className="min-h-[120vh] flex items-center">
-        <div className="max-w-[36rem] px-10 lg:ml-[28%]">
-          <p
-            className="
-              text-4xl md:text-5xl lg:text-6xl
-              font-light
-              leading-[1.25]
-              tracking-[-0.02em]
-              text-[#f5f0e8]
-            "
-          >
-            Good games aren’t held together by spectacle.
-            <br />
-            They work because the systems underneath are solid.
-          </p>
+        >
+          <div
+            style={{
+              position: 'absolute',
+              top: '22px',
+              left: '-6px',
+              width: '14px',
+              height: '2px',
+              background: 'rgba(255,255,255,0.85)',
+            }}
+          />
         </div>
       </div>
 
-      {/* Section 2 */}
-      <div className="min-h-[110vh] flex items-center">
-        <div className="max-w-[36rem] px-10 lg:ml-[28%]">
-          <p
-            className="
-              text-4xl md:text-5xl lg:text-6xl
-              font-light
-              leading-[1.25]
-              tracking-[-0.02em]
-              text-[#f5f0e8]
-            "
-          >
-            Clear structure.
-            <br />
-            Progress that feels natural.
-            <br />
-            Nothing fighting for attention.
-          </p>
+      {/* Content */}
+      <div className="min-h-[220vh] flex flex-col justify-center">
+        <div className="max-w-[520px] mx-auto text-center px-6 space-y-[12vh]">
+          <TextBlock index={0}>
+            <p className="text-[clamp(28px,4vw,40px)] leading-[1.25] font-light text-white">
+              Good games aren’t held together by spectacle.
+            </p>
+          </TextBlock>
+
+          <TextBlock index={1}>
+            <p className="text-[clamp(28px,4vw,40px)] leading-[1.25] font-light text-white">
+              They work because the systems underneath are solid.
+            </p>
+          </TextBlock>
+
+          <TextBlock index={2}>
+            <p className="text-[clamp(26px,3.6vw,36px)] leading-[1.35] font-light text-white">
+              Clear structure.
+              <br />
+              Progress that feels natural.
+            </p>
+          </TextBlock>
+
+          <TextBlock index={3}>
+            <p className="text-[clamp(26px,3.6vw,36px)] leading-[1.35] font-light text-white">
+              Nothing fighting for attention.
+            </p>
+          </TextBlock>
+
+          <TextBlock index={4}>
+            <p className="text-[clamp(26px,3.6vw,36px)] leading-[1.35] font-light text-white">
+              That’s the layer we focus on.
+            </p>
+          </TextBlock>
         </div>
       </div>
     </section>
