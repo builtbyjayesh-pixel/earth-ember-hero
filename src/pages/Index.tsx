@@ -4,6 +4,7 @@ import GenericCrochetHero from "@/components/GenericCrochetHero";
 import AestheticCrochetHero from "@/components/AestheticCrochetHero";
 import ProductSelectionGrid from "@/components/ProductSelectionGrid";
 import SaasHeroSection from "@/components/SaasHeroSection";
+import StudioPhilosophySection from "@/components/StudioPhilosophySection";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
       <AestheticCrochetHero />
       <ProductSelectionGrid />
       <SaasHeroSection />
+      <StudioPhilosophySection />
     </main>
   );
 };
