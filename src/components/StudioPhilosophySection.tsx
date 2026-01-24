@@ -26,8 +26,8 @@ const StudioPhilosophySection = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Glyph moves subtly with scroll
-  const glyphOffset = scrollProgress * 18;
+  // Subtle glyph movement
+  const glyphOffset = scrollProgress * 16;
 
   return (
     <section
@@ -35,29 +35,29 @@ const StudioPhilosophySection = () => {
       className="relative overflow-hidden"
       style={{ isolation: 'isolate' }}
     >
-      {/* Background gradient */}
+      {/* Continuous background gradient */}
       <div
         className="absolute inset-0 -z-10"
         style={{
           background: `
             linear-gradient(
               to bottom,
-              #4b0f0f 0%,
-              #6f1414 35%,
-              #8e2323 60%,
+              #5b0f0f 0%,
+              #7a1a1a 40%,
+              #9c3a3a 70%,
               #f4efe8 100%
             )
           `,
         }}
       />
 
-      {/* Soft grain overlay */}
+      {/* Subtle grain */}
       <div
         className="absolute inset-0 -z-10 pointer-events-none"
         style={{
           backgroundImage:
-            'repeating-linear-gradient(0deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 1px, transparent 1px, transparent 2px)',
-          opacity: 0.25,
+            'repeating-linear-gradient(0deg, rgba(255,255,255,0.025), rgba(255,255,255,0.025) 1px, transparent 1px, transparent 2px)',
+          opacity: 0.3,
           mixBlendMode: 'overlay',
         }}
       />
@@ -67,7 +67,7 @@ const StudioPhilosophySection = () => {
         className="absolute pointer-events-none z-10"
         style={{
           left: '12%',
-          top: `calc(30vh + ${glyphOffset}vh)`,
+          top: `calc(28vh + ${glyphOffset}vh)`,
           width: '3px',
           height: '18vh',
           background: '#f5f0e8',
@@ -87,8 +87,16 @@ const StudioPhilosophySection = () => {
 
       {/* Section 1 */}
       <div className="min-h-[120vh] flex items-center">
-        <div className="max-w-[32rem] px-10 lg:ml-[28%] space-y-10 text-[#f5f0e8]">
-          <p className="text-3xl md:text-4xl lg:text-5xl font-light leading-tight">
+        <div className="max-w-[34rem] px-10 lg:ml-[28%]">
+          <p
+            className="
+              text-4xl md:text-5xl lg:text-6xl
+              font-light
+              leading-[1.15]
+              tracking-[-0.02em]
+              text-[#f5f0e8]
+            "
+          >
             Good games aren’t held together by spectacle.
             <br />
             They work because the systems underneath are solid.
@@ -98,8 +106,16 @@ const StudioPhilosophySection = () => {
 
       {/* Section 2 */}
       <div className="min-h-[110vh] flex items-center">
-        <div className="max-w-[32rem] px-10 lg:ml-[28%] space-y-8 text-[#2a1a1a]">
-          <p className="text-3xl md:text-4xl lg:text-5xl font-light leading-tight">
+        <div className="max-w-[34rem] px-10 lg:ml-[28%]">
+          <p
+            className="
+              text-4xl md:text-5xl lg:text-6xl
+              font-light
+              leading-[1.15]
+              tracking-[-0.02em]
+              text-[#f5f0e8]
+            "
+          >
             Clear structure.
             <br />
             Progress that feels natural.
