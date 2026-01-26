@@ -2,32 +2,43 @@ import { useEffect, useRef, useState } from 'react';
 
 const StudioPhilosophySection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
+  const blockRefs = useRef<HTMLDivElement[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
-
-  const TOTAL_BLOCKS = 5;
+  const [glyphTop, setGlyphTop] = useState(0);
 
   useEffect(() => {
     const onScroll = () => {
-      if (!containerRef.current) return;
+      const viewportCenter = window.innerHeight * 0.5;
 
-      const rect = containerRef.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const totalHeight = containerRef.current.offsetHeight;
+      let closest = 0;
+      let minDistance = Infinity;
 
-      // normalized scroll progress through component
-      const scrollStart = viewportHeight * 0.4;
-      const scrollEnd = totalHeight - viewportHeight * 0.4;
-      const scrolled = Math.min(
-        Math.max(-rect.top + scrollStart, 0),
-        scrollEnd
-      );
+      blockRefs.current.forEach((block, i) => {
+        if (!block) return;
+        const rect = block.getBoundingClientRect();
+        const center = rect.top + rect.height / 2;
+        const distance = Math.abs(center - viewportCenter);
 
-      const normalized = scrolled / scrollEnd;
-      setProgress(normalized);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closest = i;
+        }
+      });
 
-      const index = Math.round(normalized * (TOTAL_BLOCKS - 1));
-      setActiveIndex(index);
+      setActiveIndex(closest);
+
+      const activeBlock = blockRefs.current[closest];
+      if (activeBlock && containerRef.current) {
+        const blockRect = activeBlock.getBoundingClientRect();
+        const containerRect = containerRef.current.getBoundingClientRect();
+
+        const center =
+          blockRect.top -
+          containerRect.top +
+          blockRect.height / 2;
+
+        setGlyphTop(center);
+      }
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -35,12 +46,6 @@ const StudioPhilosophySection = () => {
 
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  // Glyph rail
-  const RAIL_TOP_VH = 22;
-  const RAIL_HEIGHT_VH = 56;
-  const STEP = RAIL_HEIGHT_VH / (TOTAL_BLOCKS - 1);
-  const glyphTop = `calc(${RAIL_TOP_VH}vh + ${activeIndex * STEP}vh)`;
 
   const TextBlock = ({
     index,
@@ -53,10 +58,12 @@ const StudioPhilosophySection = () => {
 
     return (
       <div
-        data-block
+        ref={(el) => {
+          if (el) blockRefs.current[index] = el;
+        }}
         className="transition-all duration-500"
         style={{
-          opacity: isActive ? 1 : 0.32,
+          opacity: isActive ? 1 : 0.35,
           filter: isActive ? 'blur(0px)' : 'blur(1.2px)',
         }}
       >
@@ -74,11 +81,12 @@ const StudioPhilosophySection = () => {
           'radial-gradient(120% 90% at 50% 35%, #8b1d1d 0%, #5c0f0f 45%, #2f0a0a 100%)',
       }}
     >
-      {/* Glyph rail */}
+      {/* Glyph */}
       <div
         className="absolute left-1/2 -translate-x-[260px] pointer-events-none z-10"
         style={{
           top: glyphTop,
+          transform: 'translate(-260px, -50%)',
           transition:
             'top 0.45s cubic-bezier(0.22, 1, 0.36, 1)',
         }}
@@ -86,7 +94,7 @@ const StudioPhilosophySection = () => {
         <div
           style={{
             width: '2px',
-            height: '60px',
+            height: '56px',
             background: 'rgba(255,255,255,0.85)',
             position: 'relative',
           }}
@@ -109,33 +117,41 @@ const StudioPhilosophySection = () => {
         <div className="max-w-[540px] mx-auto text-center px-6 space-y-[14vh]">
           <TextBlock index={0}>
             <p className="text-[clamp(30px,4vw,42px)] leading-[1.35] font-light text-white">
-              Good games aren’t held together by spectacle.
+              A good website doesn’t ask for attention.
             </p>
           </TextBlock>
 
           <TextBlock index={1}>
-            <p className="text-[clamp(30px,4vw,42px)] leading-[1.35] font-light text-white">
-              They work because the systems underneath are solid.
+            <p className="text-[clamp(26px,3.6vw,36px)] leading-[1.45] font-light text-white">
+              When structure is clear,
+              <br />
+              people know where to go next
+              <br />
+              without thinking about it.
             </p>
           </TextBlock>
 
           <TextBlock index={2}>
             <p className="text-[clamp(26px,3.6vw,36px)] leading-[1.45] font-light text-white">
-              Clear structure.
+              Nothing feels rushed.
               <br />
-              Progress that feels natural.
+              Nothing feels hidden.
             </p>
           </TextBlock>
 
           <TextBlock index={3}>
             <p className="text-[clamp(26px,3.6vw,36px)] leading-[1.45] font-light text-white">
-              Nothing fighting for attention.
+              The experience stays calm,
+              <br />
+              even as content grows.
             </p>
           </TextBlock>
 
           <TextBlock index={4}>
             <p className="text-[clamp(26px,3.6vw,36px)] leading-[1.45] font-light text-white">
-              That’s the layer we focus on.
+              That’s how we build —
+              <br />
+              so it still works long after launch.
             </p>
           </TextBlock>
         </div>
