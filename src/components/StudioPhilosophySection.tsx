@@ -5,10 +5,15 @@ const StudioPhilosophySection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const blocks = [
-    'A good website doesn’t ask for attention.',
-    'When structure is clear, people know where to go next without thinking about it.',
-    'That’s the layer we focus on.',
-    'Built by Jayesh is about clarity that holds up after launch.',
+    'A good website doesn’t ask for attention.
+
+When structure is clear,
+people know where to go next
+without thinking about it.
+
+Nothing is fighting for focus.
+
+That’s what we focus on.',
   ];
 
   useEffect(() => {
