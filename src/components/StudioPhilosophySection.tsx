@@ -5,17 +5,11 @@ const StudioPhilosophySection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const blocks = [
-    'A good website doesn’t ask for attention.
-
-When structure is clear,
-people know where to go next
-without thinking about it.
-
-Nothing is fighting for focus.
-
-That’s what we focus on.',
-  ];
-
+  'A good website doesn’t ask for attention.',
+  'When structure is clear, people know where to go next without thinking about it.',
+  'Nothing is fighting for focus.',
+  'That’s what we focus on.',
+];
   useEffect(() => {
     const handleScroll = () => {
       if (!containerRef.current) return;
