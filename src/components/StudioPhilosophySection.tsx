@@ -54,8 +54,9 @@ export default function ClaritySection() {
                 fontSize: 'clamp(1.6rem, 2.2vw, 2.4rem)',
                 lineHeight: 1.55,
                 color: '#ffffff',
-                opacity: isActive ? 1 : 0,
-                filter: isActive ? 'blur(0px)' : 'blur(6px)',
+                opacity: isActive ? 1 : 0.25,
+
+                filter: isActive ? 'blur(0px)' : 'blur(4px)',
               }}
             >
               {text}
