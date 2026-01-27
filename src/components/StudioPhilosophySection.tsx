@@ -1,98 +1,153 @@
 import { useEffect, useRef, useState } from 'react';
 
-const StudioPhilosophySection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+/** TURN THIS ON ONLY WHILE RECORDING */
+const AUTO_PLAY = true;
 
-  const blocks = [
+const blocks = [
   'A good website doesn’t ask for attention.',
   'When structure is clear, people know where to go next without thinking about it.',
   'Nothing is fighting for focus.',
   'That’s what we focus on.',
 ];
+
+export default function PhilosophySection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const blockRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [glyphTop, setGlyphTop] = useState(0);
+
+  /* ----------------------------------
+     Focus + glyph tracking (unchanged)
+  ---------------------------------- */
   useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current) return;
-
+    const onScroll = () => {
       const viewportCenter = window.innerHeight * 0.5;
-      const elements = containerRef.current.querySelectorAll('[data-block]');
-      let closestIndex = 0;
-      let closestDistance = Infinity;
 
-      elements.forEach((el, index) => {
+      let closest = 0;
+      let minDistance = Infinity;
+
+      blockRefs.current.forEach((el, index) => {
+        if (!el) return;
         const rect = el.getBoundingClientRect();
-        const elCenter = rect.top + rect.height / 2;
-        const distance = Math.abs(elCenter - viewportCenter);
+        const center = rect.top + rect.height / 2;
+        const distance = Math.abs(center - viewportCenter);
 
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestIndex = index;
+        if (distance < minDistance) {
+          minDistance = distance;
+          closest = index;
         }
       });
 
-      setActiveIndex(closestIndex);
+      setActiveIndex(closest);
+
+      const activeEl = blockRefs.current[closest];
+      if (activeEl && containerRef.current) {
+        const blockRect = activeEl.getBoundingClientRect();
+        const containerRect = containerRef.current.getBoundingClientRect();
+
+        const center =
+          blockRect.top -
+          containerRect.top +
+          blockRect.height / 2;
+
+        setGlyphTop(center);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  /* ----------------------------------
+     AUTO-SCROLL (Director Mode)
+     ONLY ADDITION
+  ---------------------------------- */
+  useEffect(() => {
+    if (!AUTO_PLAY || !containerRef.current) return;
+
+    let start: number | null = null;
+    const duration = 7500; // ~8 seconds total
+
+    const startScroll = window.scrollY;
+    const endScroll =
+      containerRef.current.offsetTop +
+      containerRef.current.offsetHeight -
+      window.innerHeight;
+
+    // lock user scroll
+    document.body.style.overflow = 'hidden';
+
+    const animate = (timestamp: number) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+
+      // smooth ease-out
+      const eased = 1 - Math.pow(1 - progress, 3);
+
+      window.scrollTo(
+        0,
+        startScroll + (endScroll - startScroll) * eased
+      );
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        document.body.style.overflow = '';
+      }
+    };
+
+    requestAnimationFrame(animate);
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
+  /* ---------------------------------- */
+
   return (
-    <div
+    <section
       ref={containerRef}
-      className="relative"
+      className="relative min-h-[220vh] flex items-center overflow-hidden"
       style={{
         background:
-          'radial-gradient(120% 120% at 50% 0%, #8f1d1d 0%, #6b1212 45%, #4a0c0c 100%)',
+          'linear-gradient(180deg, #5f0f0f 0%, #7b1515 45%, #5f0f0f 100%)',
       }}
     >
-      {/* Sliding Window Glyph */}
+      {/* Diamond Glyph */}
       <div
         className="fixed z-20 pointer-events-none"
         style={{
-          left: '8%',
-          top: '30vh',
-          height: '40vh',
-          width: '2px',
-          background: 'rgba(255,255,255,0.25)',
+          left: '14%',
+          top: glyphTop,
+          transform: 'translate(-50%, -50%) rotate(45deg)',
+          width: '10px',
+          height: '10px',
+          background: 'white',
+          transition: 'top 0.35s cubic-bezier(0.22, 1, 0.36, 1)',
         }}
-      >
-        <div
-          style={{
-            position: 'absolute',
-            left: '-5px',
-            width: '12px',
-            height: '36px',
-            borderRadius: '6px',
-            background: '#ffffff',
-            transform: `translateY(${activeIndex * 90}px)`,
-            transition: 'transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)',
-          }}
-        />
-      </div>
+      />
 
       {/* Content */}
-      <div className="max-w-3xl mx-auto px-8 py-[40vh]">
+      <div className="w-full max-w-3xl mx-auto px-10 py-40 text-center">
         {blocks.map((text, index) => {
           const isActive = index === activeIndex;
 
           return (
             <p
               key={index}
-              data-block
+              ref={(el) => (blockRefs.current[index] = el)}
+              className="mb-32 last:mb-0 transition-all duration-500"
               style={{
-                fontSize: 'clamp(28px, 4vw, 42px)',
-                lineHeight: '1.35',
-                fontWeight: 300,
-                color: '#ffffff',
-                marginBottom: '96px',
+                fontSize: 'clamp(2.2rem, 4vw, 3.2rem)',
+                lineHeight: '1.25',
+                fontWeight: 400,
+                letterSpacing: '-0.015em',
+                color: 'white',
                 opacity: isActive ? 1 : 0.35,
-                filter: isActive ? 'blur(0px)' : 'blur(1.5px)',
-                transition: 'all 0.4s ease',
-                fontFamily:
-                  'system-ui, -apple-system, BlinkMacSystemFont, sans-serif',
+                filter: isActive ? 'blur(0px)' : 'blur(1.2px)',
               }}
             >
               {text}
@@ -100,8 +155,6 @@ const StudioPhilosophySection = () => {
           );
         })}
       </div>
-    </div>
+    </section>
   );
-};
-
-export default StudioPhilosophySection;
+}
