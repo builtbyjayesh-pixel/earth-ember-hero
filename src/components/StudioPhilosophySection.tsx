@@ -23,7 +23,7 @@ export default function ClaritySection() {
         return;
       }
       setActiveIndex(index);
-    }, 1600); // controls pacing
+    }, 1600);
 
     return () => clearInterval(interval);
   }, []);
@@ -40,7 +40,7 @@ export default function ClaritySection() {
       <div className="absolute left-12 top-1/3 h-40 w-px bg-white/20" />
 
       {/* Text stack */}
-      <div className="relative w-full max-w-[48ch] px-8">
+      <div className="relative w-full max-w-[48ch] px-8 h-[60vh]">
         {blocks.map((text, index) => {
           const isActive = index === activeIndex;
 
@@ -50,13 +50,12 @@ export default function ClaritySection() {
               className="absolute left-0 right-0 text-center transition-all duration-700 ease-out"
               style={{
                 top: '50%',
-                transform: `translateY(${(index - activeIndex) * 140 - 50}px)`,
+                transform: `translateY(${(index - activeIndex) * 180}px)`,
                 fontSize: 'clamp(1.6rem, 2.2vw, 2.4rem)',
                 lineHeight: 1.55,
                 color: '#ffffff',
-                opacity: isActive ? 1 : 0.25,
-
-                filter: isActive ? 'blur(0px)' : 'blur(4px)',
+                opacity: isActive ? 1 : 0.28,
+                filter: isActive ? 'blur(0px)' : 'blur(3px)',
               }}
             >
               {text}
