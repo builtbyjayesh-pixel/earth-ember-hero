@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const blocks = [
   'A good website doesn’t ask for attention.',
@@ -8,39 +8,13 @@ const blocks = [
 ];
 
 export default function ClaritySection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isActive, setIsActive] = useState(false);
 
   /* ---------------------------------
-     Activate sequence when section
-     reaches top of viewport
+     Timed progression (reel-safe)
   ---------------------------------- */
   useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && entry.boundingClientRect.top <= 0) {
-          setIsActive(true);
-        }
-      },
-      { threshold: 0.6 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  /* ---------------------------------
-     Step through blocks (timed)
-  ---------------------------------- */
-  useEffect(() => {
-    if (!isActive) return;
-
     let index = 0;
-    setActiveIndex(0);
 
     const interval = setInterval(() => {
       index += 1;
@@ -49,38 +23,39 @@ export default function ClaritySection() {
         return;
       }
       setActiveIndex(index);
-    }, 1400);
+    }, 1600); // controls pacing
 
     return () => clearInterval(interval);
-  }, [isActive]);
+  }, []);
 
   return (
     <section
-      ref={sectionRef}
-      className="relative min-h-[140vh] flex items-center justify-center"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{
         background:
           'radial-gradient(120% 120% at 50% 0%, #7c1414 0%, #5a0f0f 45%, #3a0909 100%)',
       }}
     >
-      {/* Vertical Accent Rule */}
-      <div className="absolute left-12 top-[27.5%] h-[45%] w-px bg-white/20" />
+      {/* Editorial vertical rule */}
+      <div className="absolute left-12 top-1/3 h-40 w-px bg-white/20" />
 
-      {/* Text */}
-      <div className="relative max-w-[42ch] px-8 text-center space-y-20">
+      {/* Text stack */}
+      <div className="relative w-full max-w-[48ch] px-8">
         {blocks.map((text, index) => {
-          const isFocused = index === activeIndex;
+          const isActive = index === activeIndex;
 
           return (
             <p
               key={index}
-              className="transition-all duration-500 ease-out"
+              className="absolute left-0 right-0 text-center transition-all duration-700 ease-out"
               style={{
-                fontSize: 'clamp(1.6rem, 2.4vw, 2.2rem)',
-                lineHeight: 1.45,
+                top: '50%',
+                transform: `translateY(${(index - activeIndex) * 140 - 50}px)`,
+                fontSize: 'clamp(1.6rem, 2.2vw, 2.4rem)',
+                lineHeight: 1.55,
                 color: '#ffffff',
-                opacity: isFocused ? 1 : 0.25,
-                filter: isFocused ? 'blur(0px)' : 'blur(3px)',
+                opacity: isActive ? 1 : 0,
+                filter: isActive ? 'blur(0px)' : 'blur(6px)',
               }}
             >
               {text}
