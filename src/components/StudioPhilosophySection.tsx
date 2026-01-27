@@ -6,27 +6,22 @@ const blocks = [
   'That’s the layer we focus on.',
 ];
 
-export default function FocusScrollSection() {
+export default function FocusSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const hasPlayed = useRef(false);
+  const textRefs = useRef<HTMLParagraphElement[]>([]);
+  const [active, setActive] = useState(0);
+  const [glyphY, setGlyphY] = useState<number | null>(null);
 
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  /* ------------------------------
-     Trigger once when section
-     hits top of viewport
-  -------------------------------- */
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting || hasPlayed.current) return;
-        hasPlayed.current = true;
+        if (!entry.isIntersecting) return;
         runSequence();
       },
-      { threshold: 1 }
+      { threshold: 0.9 }
     );
 
     observer.observe(el);
@@ -35,61 +30,72 @@ export default function FocusScrollSection() {
 
   const runSequence = () => {
     let i = 0;
+    setActive(0);
+
     const interval = setInterval(() => {
-      i += 1;
+      i++;
       if (i >= blocks.length) {
         clearInterval(interval);
         return;
       }
-      setActiveIndex(i);
-    }, 1600);
+      setActive(i);
+    }, 1400);
   };
+
+  useEffect(() => {
+    const el = textRefs.current[active];
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const sectionRect = sectionRef.current!.getBoundingClientRect();
+
+    setGlyphY(rect.top - sectionRect.top + rect.height / 2);
+  }, [active]);
 
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen overflow-hidden flex items-center justify-center"
+      className="relative h-screen flex items-center justify-center overflow-hidden"
       style={{
         background:
           'radial-gradient(120% 120% at 50% 0%, #7b0f0f 0%, #5a0c0c 55%, #3d0808 100%)',
       }}
     >
-      {/* Glyph track */}
-      <div className="absolute left-[14%] top-1/2 -translate-y-1/2 h-[240px] w-[1px] bg-white/20" />
+      {/* Rail */}
+      <div className="absolute left-[18%] top-0 h-full w-px bg-white/15" />
 
-      {/* Sliding window glyph */}
-      <div
-        className="absolute left-[13.5%]"
-        style={{
-          top: '50%',
-          transform: `translateY(calc(-50% + ${(activeIndex - 1) * 96}px))`,
-          width: '14px',
-          height: '44px',
-          borderRadius: '999px',
-          background: 'rgba(255,255,255,0.9)',
-          transition: 'transform 0.45s cubic-bezier(0.22,1,0.36,1)',
-        }}
-      />
+      {/* Window pill glyph */}
+      {glyphY !== null && (
+        <div
+          className="absolute left-[17.5%]"
+          style={{
+            top: glyphY,
+            width: '10px',
+            height: '34px',
+            borderRadius: '999px',
+            background: 'rgba(255,255,255,0.95)',
+            transform: 'translateY(-50%)',
+            transition: 'top 0.45s cubic-bezier(0.22,1,0.36,1)',
+          }}
+        />
+      )}
 
-      {/* Text stack */}
-      <div
-        className="relative text-center"
-        style={{
-          transform: `translateY(${-(activeIndex - 1) * 96}px)`,
-          transition: 'transform 0.45s cubic-bezier(0.22,1,0.36,1)',
-        }}
-      >
+      {/* Text */}
+      <div className="max-w-[42ch] text-center">
         {blocks.map((text, i) => (
           <p
             key={i}
+            ref={(el) => {
+              if (el) textRefs.current[i] = el;
+            }}
             style={{
-              fontSize: 'clamp(2rem, 4vw, 3.2rem)',
-              lineHeight: '1.25',
-              margin: '3rem 0',
+              fontSize: 'clamp(1.6rem, 2.4vw, 2.2rem)',
+              lineHeight: 1.45,
+              margin: '2.2rem 0',
               color: 'white',
-              opacity: i === activeIndex ? 1 : 0.25,
-              filter: i === activeIndex ? 'blur(0px)' : 'blur(1.5px)',
-              transition: 'opacity 0.4s ease, filter 0.4s ease',
+              opacity: i === active ? 1 : 0.25,
+              filter: i === active ? 'blur(0px)' : 'blur(1.2px)',
+              transition: 'opacity 0.35s ease, filter 0.35s ease',
             }}
           >
             {text}
