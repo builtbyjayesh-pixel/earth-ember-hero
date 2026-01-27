@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 const blocks = [
   'A good website doesn’t ask for attention.',
   'When structure is clear, people know where to go next without thinking about it.',
+  'Clarity shows up in the moments you don’t notice.',
   'That’s the layer we focus on.',
 ];
 
@@ -10,7 +11,7 @@ export default function FocusSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const textRefs = useRef<HTMLParagraphElement[]>([]);
   const [active, setActive] = useState(0);
-  const [glyphY, setGlyphY] = useState<number | null>(null);
+  const [glyphY, setGlyphY] = useState<number>(0);
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -18,17 +19,16 @@ export default function FocusSection() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) return;
-        runSequence();
+        if (entry.isIntersecting) startSequence();
       },
-      { threshold: 0.9 }
+      { threshold: 0.85 }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  const runSequence = () => {
+  const startSequence = () => {
     let i = 0;
     setActive(0);
 
@@ -39,17 +39,13 @@ export default function FocusSection() {
         return;
       }
       setActive(i);
-    }, 1400);
+    }, 1500);
   };
 
   useEffect(() => {
-    const el = textRefs.current[active];
-    if (!el) return;
-
-    const rect = el.getBoundingClientRect();
-    const sectionRect = sectionRef.current!.getBoundingClientRect();
-
-    setGlyphY(rect.top - sectionRect.top + rect.height / 2);
+    const trackHeight = 140;
+    const step = trackHeight / (blocks.length - 1);
+    setGlyphY(step * active);
   }, [active]);
 
   return (
@@ -61,24 +57,27 @@ export default function FocusSection() {
           'radial-gradient(120% 120% at 50% 0%, #7b0f0f 0%, #5a0c0c 55%, #3d0808 100%)',
       }}
     >
-      {/* Rail */}
-      <div className="absolute left-[18%] top-0 h-full w-px bg-white/15" />
-
-      {/* Window pill glyph */}
-      {glyphY !== null && (
-        <div
-          className="absolute left-[17.5%]"
-          style={{
-            top: glyphY,
-            width: '10px',
-            height: '34px',
-            borderRadius: '999px',
-            background: 'rgba(255,255,255,0.95)',
-            transform: 'translateY(-50%)',
-            transition: 'top 0.45s cubic-bezier(0.22,1,0.36,1)',
-          }}
-        />
-      )}
+      {/* Sliding window track */}
+      <div
+        className="absolute left-[18%] flex items-center justify-center"
+        style={{ height: 140 }}
+      >
+        <div className="relative w-px h-full bg-white/15">
+          <div
+            style={{
+              position: 'absolute',
+              top: glyphY,
+              left: '-4px',
+              width: '8px',
+              height: '28px',
+              borderRadius: '999px',
+              background: 'rgba(255,255,255,0.95)',
+              transform: 'translateY(-50%)',
+              transition: 'top 0.45s cubic-bezier(0.22,1,0.36,1)',
+            }}
+          />
+        </div>
+      </div>
 
       {/* Text */}
       <div className="max-w-[42ch] text-center">
