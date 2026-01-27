@@ -7,100 +7,108 @@ const blocks = [
   'That’s the layer we focus on.',
 ];
 
-export default function FocusSection() {
+const ClarityScrollSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const textRefs = useRef<HTMLParagraphElement[]>([]);
-  const [active, setActive] = useState(0);
-  const [glyphY, setGlyphY] = useState<number>(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isActive, setIsActive] = useState(false);
 
+  /* ---------------------------
+     Activate section ONLY when it reaches top
+  ---------------------------- */
   useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) startSequence();
+        if (entry.isIntersecting && entry.boundingClientRect.top <= 0) {
+          setIsActive(true);
+        } else {
+          setIsActive(false);
+        }
       },
-      { threshold: 0.85 }
+      { threshold: 0.6 }
     );
 
-    observer.observe(el);
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
-  const startSequence = () => {
-    let i = 0;
-    setActive(0);
+  /* ---------------------------
+     Auto-scroll blocks (local)
+  ---------------------------- */
+  useEffect(() => {
+    if (!isActive) return;
+
+    document.body.style.overflow = 'hidden';
 
     const interval = setInterval(() => {
-      i++;
-      if (i >= blocks.length) {
-        clearInterval(interval);
-        return;
-      }
-      setActive(i);
-    }, 1500);
-  };
+      setActiveIndex((prev) => {
+        if (prev === blocks.length - 1) {
+          clearInterval(interval);
+          document.body.style.overflow = '';
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 1400);
 
-  useEffect(() => {
-    const trackHeight = 140;
-    const step = trackHeight / (blocks.length - 1);
-    setGlyphY(step * active);
-  }, [active]);
+    return () => {
+      clearInterval(interval);
+      document.body.style.overflow = '';
+    };
+  }, [isActive]);
+
+  /* ---------------------------
+     Glyph movement (restrained)
+  ---------------------------- */
+  const glyphY = activeIndex * 64; // calm movement
 
   return (
     <section
       ref={sectionRef}
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-[140vh] flex items-center justify-center"
       style={{
         background:
-          'radial-gradient(120% 120% at 50% 0%, #7b0f0f 0%, #5a0c0c 55%, #3d0808 100%)',
+          'radial-gradient(120% 120% at 50% 0%, #7c1414 0%, #5a0f0f 45%, #3a0909 100%)',
       }}
     >
-      {/* Sliding window track */}
+      {/* Glyph track (short window, not scrollbar) */}
       <div
-        className="absolute left-[18%] flex items-center justify-center"
-        style={{ height: 140 }}
-      >
-        <div className="relative w-px h-full bg-white/15">
-          <div
-            style={{
-              position: 'absolute',
-              top: glyphY,
-              left: '-4px',
-              width: '8px',
-              height: '28px',
-              borderRadius: '999px',
-              background: 'rgba(255,255,255,0.95)',
-              transform: 'translateY(-50%)',
-              transition: 'top 0.45s cubic-bezier(0.22,1,0.36,1)',
-            }}
-          />
-        </div>
-      </div>
+        className="absolute left-12 w-px bg-white/20"
+        style={{
+          height: '45%',
+          top: '27.5%',
+        }}
+      />
 
-      {/* Text */}
-      <div className="max-w-[42ch] text-center">
-        {blocks.map((text, i) => (
-          <p
-            key={i}
-            ref={(el) => {
-              if (el) textRefs.current[i] = el;
-            }}
-            style={{
-              fontSize: 'clamp(1.6rem, 2.4vw, 2.2rem)',
-              lineHeight: 1.45,
-              margin: '2.2rem 0',
-              color: 'white',
-              opacity: i === active ? 1 : 0.25,
-              filter: i === active ? 'blur(0px)' : 'blur(1.2px)',
-              transition: 'opacity 0.35s ease, filter 0.35s ease',
-            }}
-          >
-            {text}
-          </p>
-        ))}
+      {/* Sliding pill glyph */}
+      <div
+        className="absolute left-[42px] w-2 h-6 rounded-full bg-white transition-all duration-500 ease-out"
+        style={{
+          top: `calc(27.5% + ${glyphY}px + 6px)`, // baseline alignment
+        }}
+      />
+
+      {/* Text blocks */}
+      <div className="relative max-w-3xl px-8 space-y-20 text-center">
+        {blocks.map((text, index) => {
+          const isFocused = index === activeIndex;
+
+          return (
+            <p
+              key={index}
+              className="text-3xl md:text-4xl leading-[1.25] transition-all duration-500 ease-out"
+              style={{
+                color: '#fff',
+                opacity: isFocused ? 1 : 0.25,
+                filter: isFocused ? 'blur(0px)' : 'blur(3px)',
+              }}
+            >
+              {text}
+            </p>
+          );
+        })}
       </div>
     </section>
   );
-}
+};
+
+export default ClarityScrollSection;
