@@ -10,21 +10,21 @@ const ClarityHeroSection = () => {
       className="relative min-h-screen overflow-hidden"
       style={{
         backgroundColor: "#141414",
-        perspective: "1200px",
+        perspective: "1400px",
       }}
     >
-      {/* Ambient lighting */}
+      {/* Ambient light */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background: `
-            radial-gradient(ellipse 70% 50% at 50% 15%, rgba(255,255,255,0.04), transparent 60%),
-            radial-gradient(ellipse 60% 40% at 80% 80%, rgba(255,255,255,0.03), transparent 50%)
+            radial-gradient(ellipse 70% 50% at 50% 15%, rgba(255,255,255,0.05), transparent 60%),
+            radial-gradient(ellipse 60% 40% at 80% 80%, rgba(255,255,255,0.03), transparent 55%)
           `,
         }}
       />
 
-      {/* 3D FORM LAYER */}
+      {/* ================= 3D HERO FORM ================= */}
       <div
         className="absolute inset-0 flex items-center justify-center pointer-events-none"
         style={{
@@ -33,17 +33,19 @@ const ClarityHeroSection = () => {
       >
         <div
           style={{
-            width: "420px",
-            height: "720px",
+            width: "360px",
+            height: "700px",
             backgroundImage: "url(/src/assets/3dimage.png)",
             backgroundSize: "cover",
             backgroundPosition: "center",
-            transform: "translateZ(-120px)",
-            filter: "brightness(0.85) contrast(1.05)",
-            opacity: 0.9,
+            transform: "translateZ(80px)",
+            opacity: 0.65,
+            filter: "brightness(1.2) contrast(1.25)",
+            borderRadius: "6px",
           }}
         />
       </div>
+      {/* ================================================= */}
 
       {/* NAVIGATION */}
       <nav className="relative z-20 flex items-center justify-between px-8 md:px-16 lg:px-24 py-6">
