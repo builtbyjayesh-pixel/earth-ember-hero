@@ -1,50 +1,83 @@
 import { useState } from "react";
-import hero3D from "@/assets/3dimage.png";
+import heroImage from "@/assets/3dimage.png";
 
 const ClarityHeroSection = () => {
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
+
   const navItems = ["Work", "Approach", "About", "Contact"];
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#141414]">
-
-      {/* ================= BACKGROUND IMAGE (3D FORM) ================= */}
-      <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
+    <section
+      className="relative min-h-screen overflow-hidden"
+      style={{ backgroundColor: "#141414" }}
+    >
+      {/* =========================
+          BACKGROUND IMAGE (3D)
+      ========================== */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          perspective: "1400px",
+          zIndex: 1,
+        }}
+      >
         <img
-          src={hero3D}
-          alt="Abstract 3D form"
-          className="w-[90vw] max-w-[900px]"
+          src={heroImage}
+          alt=""
           style={{
-            opacity: 0.6,
-            filter: "contrast(1.15) brightness(0.9)",
-            transform: "perspective(1200px) rotateX(12deg)",
-            maskImage:
-              "radial-gradient(circle at center, black 45%, transparent 75%)",
-            WebkitMaskImage:
-              "radial-gradient(circle at center, black 45%, transparent 75%)",
+            width: "420px",
+            maxWidth: "70vw",
+            transform:
+              "rotateX(10deg) translateY(40px) scale(1.05)",
+            opacity: 0.35,
+            filter: "brightness(0.8) contrast(0.95)",
+            willChange: "transform",
           }}
         />
       </div>
-      {/* =============================================================== */}
 
-      {/* SOFT VIGNETTE */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none" />
+      {/* =========================
+          CENTER FOG (EDITORIAL)
+      ========================== */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          zIndex: 2,
+          background:
+            "radial-gradient(circle at center, rgba(20,20,20,0.75) 0%, transparent 55%)",
+        }}
+      />
 
-      {/* NAVIGATION */}
-      <nav className="relative z-30 flex items-center justify-between px-8 md:px-16 lg:px-24 py-6">
-        <div className="text-sm tracking-widest text-white/90">STUDIO</div>
+      {/* =========================
+          TOP NAVIGATION
+      ========================== */}
+      <nav className="relative z-20 flex items-center justify-between px-8 md:px-16 lg:px-24 py-6">
+        <div
+          className="text-sm tracking-widest"
+          style={{
+            color: "rgba(255,255,255,0.9)",
+            fontWeight: 500,
+          }}
+        >
+          STUDIO
+        </div>
 
-        <div className="flex items-center gap-10">
+        <div className="flex items-center gap-8 md:gap-12">
           {navItems.map((item) => (
             <a
               key={item}
-              href="#"
-              className="text-sm transition"
+              href={`#${item.toLowerCase()}`}
+              className="text-sm transition-opacity duration-300"
               style={{
                 color:
                   hoveredNav === item
                     ? "rgba(255,255,255,1)"
                     : "rgba(255,255,255,0.6)",
+                fontWeight: 400,
+                letterSpacing: "0.02em",
               }}
               onMouseEnter={() => setHoveredNav(item)}
               onMouseLeave={() => setHoveredNav(null)}
@@ -53,34 +86,109 @@ const ClarityHeroSection = () => {
             </a>
           ))}
 
-          <button className="bg-[#E8C547] text-black px-5 py-2 text-sm font-medium">
+          <button
+            className="text-sm px-5 py-2 transition-all duration-300 hover:opacity-90"
+            style={{
+              backgroundColor: "#E8C547",
+              color: "#141414",
+              fontWeight: 500,
+              letterSpacing: "0.02em",
+              borderRadius: "2px",
+            }}
+          >
             Get Started
           </button>
         </div>
       </nav>
 
-      {/* HERO CONTENT */}
-      <div className="relative z-40 flex flex-col items-center justify-center min-h-[70vh] text-center">
-        <h1 className="text-white text-[clamp(3rem,7vw,5.5rem)] font-semibold tracking-tight">
+      {/* =========================
+          HERO CONTENT
+      ========================== */}
+      <div
+        className="relative z-20 flex flex-col items-center justify-center px-8"
+        style={{ minHeight: "calc(100vh - 200px)" }}
+      >
+        <h1
+          className="text-center"
+          style={{
+            fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
+            fontWeight: 600,
+            color: "#ffffff",
+            letterSpacing: "-0.015em",
+            lineHeight: 1.1,
+          }}
+        >
           One clear decision.
         </h1>
 
-        <button className="mt-12 bg-[#E8C547] text-black px-8 py-4 text-sm tracking-wide">
+        <button
+          className="mt-12 px-8 py-4 transition-all duration-300 hover:opacity-90"
+          style={{
+            backgroundColor: "#E8C547",
+            color: "#141414",
+            fontSize: "0.95rem",
+            fontWeight: 500,
+            letterSpacing: "0.03em",
+            borderRadius: "2px",
+          }}
+        >
           Start with clarity
         </button>
       </div>
 
-      {/* VALUES */}
-      <div className="relative z-40 px-16 pb-24 grid grid-cols-3 text-white/40 text-sm">
-        <span>Strong spacing</span>
-        <span className="text-center">Disciplined clarity</span>
-        <span className="text-right">Built for real use</span>
+      {/* =========================
+          VALUES ROW
+      ========================== */}
+      <div className="relative z-20 px-8 md:px-16 lg:px-24 pb-24">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
+          {["Strong spacing", "Disciplined clarity", "Built for real use"].map(
+            (title) => (
+              <div key={title} className="text-center md:text-left">
+                <h3
+                  style={{
+                    fontSize: "0.95rem",
+                    fontWeight: 400,
+                    color: "rgba(255,255,255,0.45)",
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  {title}
+                </h3>
+              </div>
+            )
+          )}
+        </div>
       </div>
 
-      {/* EDITORIAL */}
-      <div className="absolute bottom-8 left-8 text-white/30 text-xs tracking-widest z-40">
-        ONE DECISION.<br />NO DISTRACTIONS.
+      {/* =========================
+          EDITORIAL MARK
+      ========================== */}
+      <div
+        className="absolute bottom-8 left-8 md:left-16 z-20"
+        style={{
+          fontSize: "0.65rem",
+          fontWeight: 400,
+          color: "rgba(255,255,255,0.25)",
+          letterSpacing: "0.15em",
+          lineHeight: 1.8,
+        }}
+      >
+        ONE DECISION.
+        <br />
+        NO DISTRACTIONS.
       </div>
+
+      {/* =========================
+          BOTTOM FADE
+      ========================== */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+        style={{
+          zIndex: 3,
+          background:
+            "linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 100%)",
+        }}
+      />
     </section>
   );
 };
