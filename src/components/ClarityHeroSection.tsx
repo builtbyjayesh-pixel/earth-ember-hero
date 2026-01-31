@@ -64,7 +64,8 @@ const ClarityHeroSection = () => {
             backgroundImage: `url(${heroTexture})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            opacity: 0.28,
+            opacity: 0.22, // softened
+            filter: "blur(1px)", // subtle calm
           }}
         >
           {/* Left fade */}
@@ -85,12 +86,12 @@ const ClarityHeroSection = () => {
             }}
           />
 
-          {/* Subtle vignette */}
+          {/* Center vignette */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%)",
+                "radial-gradient(circle at center, rgba(20,20,20,0.7) 0%, transparent 55%)",
             }}
           />
         </div>
@@ -101,8 +102,10 @@ const ClarityHeroSection = () => {
         className="relative z-10 flex flex-col items-center justify-center px-8 text-center"
         style={{ minHeight: "calc(100vh - 180px)" }}
       >
+        {/* Headline */}
         <h1
           style={{
+            marginTop: "-32px", // more breathing room
             fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
             fontWeight: 600,
             color: "#ffffff",
@@ -113,8 +116,9 @@ const ClarityHeroSection = () => {
           One clear decision.
         </h1>
 
+        {/* CTA */}
         <button
-          className="mt-12 px-8 py-4 transition-all duration-300 hover:opacity-90"
+          className="mt-16 px-8 py-4 transition-all duration-300 hover:opacity-90"
           style={{
             backgroundColor: "#E8C547",
             color: "#141414",
