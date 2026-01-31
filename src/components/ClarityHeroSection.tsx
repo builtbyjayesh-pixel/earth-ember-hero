@@ -1,5 +1,5 @@
 import { useState } from "react";
-import heroImage from "@/assets/3dimage.png";
+import heroTexture from "../assets/3dimage.png";
 
 const ClarityHeroSection = () => {
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
@@ -11,56 +11,11 @@ const ClarityHeroSection = () => {
       className="relative min-h-screen overflow-hidden"
       style={{ backgroundColor: "#141414" }}
     >
-      {/* =========================
-          BACKGROUND IMAGE (3D)
-      ========================== */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          perspective: "1400px",
-          zIndex: 1,
-        }}
-      >
-        <img
-          src={heroImage}
-          alt=""
-          style={{
-            width: "420px",
-            maxWidth: "70vw",
-            transform:
-              "rotateX(10deg) translateY(40px) scale(1.05)",
-            opacity: 0.35,
-            filter: "brightness(0.8) contrast(0.95)",
-            willChange: "transform",
-          }}
-        />
-      </div>
-
-      {/* =========================
-          CENTER FOG (EDITORIAL)
-      ========================== */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          zIndex: 2,
-          background:
-            "radial-gradient(circle at center, rgba(20,20,20,0.75) 0%, transparent 55%)",
-        }}
-      />
-
-      {/* =========================
-          TOP NAVIGATION
-      ========================== */}
+      {/* ================= NAV ================= */}
       <nav className="relative z-20 flex items-center justify-between px-8 md:px-16 lg:px-24 py-6">
         <div
           className="text-sm tracking-widest"
-          style={{
-            color: "rgba(255,255,255,0.9)",
-            fontWeight: 500,
-          }}
+          style={{ color: "rgba(255,255,255,0.9)", fontWeight: 500 }}
         >
           STUDIO
         </div>
@@ -76,7 +31,6 @@ const ClarityHeroSection = () => {
                   hoveredNav === item
                     ? "rgba(255,255,255,1)"
                     : "rgba(255,255,255,0.6)",
-                fontWeight: 400,
                 letterSpacing: "0.02em",
               }}
               onMouseEnter={() => setHoveredNav(item)}
@@ -101,20 +55,58 @@ const ClarityHeroSection = () => {
         </div>
       </nav>
 
-      {/* =========================
-          HERO CONTENT
-      ========================== */}
+      {/* ============ 3D BACKGROUND LAYER ============ */}
+      <div className="absolute inset-0 z-0 flex justify-center pointer-events-none">
+        <div
+          className="relative h-full"
+          style={{
+            width: "70%",
+            backgroundImage: `url(${heroTexture})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: 0.28,
+          }}
+        >
+          {/* Left fade */}
+          <div
+            className="absolute inset-y-0 left-0 w-32"
+            style={{
+              background:
+                "linear-gradient(to right, #141414 0%, transparent 100%)",
+            }}
+          />
+
+          {/* Right fade */}
+          <div
+            className="absolute inset-y-0 right-0 w-32"
+            style={{
+              background:
+                "linear-gradient(to left, #141414 0%, transparent 100%)",
+            }}
+          />
+
+          {/* Subtle vignette */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.4) 100%)",
+            }}
+          />
+        </div>
+      </div>
+
+      {/* ============ HERO CONTENT ============ */}
       <div
-        className="relative z-20 flex flex-col items-center justify-center px-8"
-        style={{ minHeight: "calc(100vh - 200px)" }}
+        className="relative z-10 flex flex-col items-center justify-center px-8 text-center"
+        style={{ minHeight: "calc(100vh - 180px)" }}
       >
         <h1
-          className="text-center"
           style={{
             fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
             fontWeight: 600,
             color: "#ffffff",
-            letterSpacing: "-0.015em",
+            letterSpacing: "-0.02em",
             lineHeight: 1.1,
           }}
         >
@@ -136,14 +128,12 @@ const ClarityHeroSection = () => {
         </button>
       </div>
 
-      {/* =========================
-          VALUES ROW
-      ========================== */}
-      <div className="relative z-20 px-8 md:px-16 lg:px-24 pb-24">
+      {/* ============ VALUES ROW ============ */}
+      <div className="relative z-10 px-8 md:px-16 lg:px-24 pb-24">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
           {["Strong spacing", "Disciplined clarity", "Built for real use"].map(
             (title) => (
-              <div key={title} className="text-center md:text-left">
+              <div key={title}>
                 <h3
                   style={{
                     fontSize: "0.95rem",
@@ -160,11 +150,9 @@ const ClarityHeroSection = () => {
         </div>
       </div>
 
-      {/* =========================
-          EDITORIAL MARK
-      ========================== */}
+      {/* ============ EDITORIAL TAG ============ */}
       <div
-        className="absolute bottom-8 left-8 md:left-16 z-20"
+        className="absolute bottom-8 left-8 md:left-16 z-10"
         style={{
           fontSize: "0.65rem",
           fontWeight: 400,
@@ -177,18 +165,6 @@ const ClarityHeroSection = () => {
         <br />
         NO DISTRACTIONS.
       </div>
-
-      {/* =========================
-          BOTTOM FADE
-      ========================== */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-        style={{
-          zIndex: 3,
-          background:
-            "linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 100%)",
-        }}
-      />
     </section>
   );
 };
