@@ -68,40 +68,41 @@ const ConfusionVsClarityReel = () => {
               }}
             />
 
-            {/* Distracting background element that overpowers hierarchy */}
+            {/* Distracting background element - OVERPOWERS everything */}
             <div
               className="absolute transition-all duration-700"
               style={{
-                top: "8%",
-                left: "8%",
-                right: "8%",
-                height: "35%",
-                backgroundColor: "rgba(140, 120, 60, 0.25)", // Too prominent dirty yellow
-                border: "2px solid rgba(160, 130, 50, 0.35)", // Too visible border
-                borderRadius: "3px",
+                top: "6%",
+                left: "6%",
+                right: "6%",
+                height: "45%", // Larger, more dominant
+                backgroundColor: "rgba(150, 125, 55, 0.35)", // More prominent
+                border: "3px solid rgba(175, 145, 60, 0.45)", // Thicker, more visible
+                borderRadius: "4px",
+                boxShadow: "inset 0 0 30px rgba(140, 115, 45, 0.2)", // Inner glow competes
                 opacity: phase >= 1 ? 1 : 0,
                 transform: phase >= 1
-                  ? `translateY(${phase >= 3 ? (phase % 2 === 0 ? "3px" : "-2px") : "0"}) rotate(${phase >= 4 ? "0.3deg" : "0deg"})`
+                  ? `translateY(${phase >= 3 ? (phase % 2 === 0 ? "3px" : "-2px") : "0"}) rotate(${phase >= 4 ? "0.4deg" : "0deg"})`
                   : "translateY(10px)",
               }}
             />
 
-            {/* Headline - blends into background, low contrast, off-grid */}
+            {/* Headline - weak, blends into background, feels secondary */}
             <div
               className="absolute transition-all duration-500"
               style={{
-                top: "48%",
-                left: phase >= 2 ? "9%" : "12%", // Off-grid alignment
-                right: "14%",
+                top: "56%",
+                left: phase >= 2 ? "9%" : "12%", // Off-grid
+                right: "16%",
                 opacity: phase >= 2 ? 1 : 0,
                 transform: phase >= 4 ? `translateX(${phase % 2 === 0 ? "3px" : "1px"})` : "translateX(0)",
               }}
             >
               <p
                 style={{
-                  fontSize: "clamp(0.85rem, 1.7vw, 1.25rem)",
+                  fontSize: "clamp(0.8rem, 1.5vw, 1.1rem)", // Smaller than right
                   fontWeight: 400,
-                  color: "rgba(145, 130, 90, 0.55)", // Blends into muddy background
+                  color: "rgba(135, 120, 85, 0.5)", // Even lower contrast
                   letterSpacing: "0.01em",
                   lineHeight: 1.35,
                 }}
@@ -110,30 +111,31 @@ const ConfusionVsClarityReel = () => {
               </p>
             </div>
 
-            {/* CTA Button - doesn't feel primary, fades on switch, dims on hover */}
+            {/* CTA Button - NOT the primary action, shrinks and dims on hover */}
             <div
               className="absolute transition-all"
               style={{
-                top: "62%",
+                top: "68%",
                 left: phase >= 5 ? "11%" : "10%",
-                opacity: phase >= 3 ? (phase === 5 ? 0.4 : 0.7) : 0, // Fades during text switch
-                transform: phase >= 3 ? "translateY(0)" : "translateY(8px)",
+                opacity: phase >= 3 ? (phase === 5 ? 0.35 : 0.6) : 0, // Lower overall
+                transform: phase >= 3 
+                  ? `translateY(0) scale(${phase >= 4 && phase < 6 ? 0.92 : 1})` // Shrinks on hover
+                  : "translateY(8px)",
                 transitionDuration: phase === 5 ? "200ms" : "400ms",
               }}
             >
               <div
                 style={{
-                  padding: "7px 14px",
-                  backgroundColor: "rgba(130, 110, 60, 0.35)", // Washed, uncertain
-                  color: "rgba(170, 150, 100, 0.6)", // Low contrast text
-                  fontSize: "0.7rem",
+                  padding: "6px 12px", // Smaller padding
+                  backgroundColor: "rgba(120, 100, 55, 0.3)", // Weaker
+                  color: "rgba(155, 140, 95, 0.55)", // Lower contrast
+                  fontSize: "0.65rem", // Smaller
                   fontWeight: 400,
                   letterSpacing: "0.02em",
                   borderRadius: "2px",
-                  border: "1px solid rgba(110, 95, 50, 0.3)",
-                  // Dims on "hover" phase instead of brightening
-                  filter: phase >= 4 && phase < 6 ? "brightness(0.8)" : "brightness(1)",
-                  transition: "filter 300ms ease",
+                  border: "1px solid rgba(100, 85, 45, 0.25)",
+                  filter: phase >= 4 && phase < 6 ? "brightness(0.65)" : "brightness(1)", // Dims more
+                  transition: "all 300ms ease",
                 }}
               >
                 {phase >= 5 ? "Learn more" : "Get started"}
@@ -236,20 +238,36 @@ const ConfusionVsClarityReel = () => {
             <div
               className="absolute"
               style={{
-                top: "12%",
+                top: "10%",
                 left: "10%",
                 right: "10%",
-                height: "22%",
-                backgroundColor: "rgba(255, 255, 255, 0.03)",
-                border: "1px solid rgba(255, 255, 255, 0.06)",
+                height: "20%",
+                backgroundColor: "rgba(255, 255, 255, 0.025)",
+                border: "1px solid rgba(255, 255, 255, 0.05)",
                 borderRadius: "2px",
                 opacity: phase >= 1 ? 1 : 0,
                 transform: phase >= 1 
                   ? "translateY(0)" 
                   : "translateY(15px)",
                 transition: phase >= 1 
-                  ? "all 500ms cubic-bezier(0.34, 1.56, 0.64, 1)" // Overshoot on landing
+                  ? "all 500ms cubic-bezier(0.34, 1.56, 0.64, 1)"
                   : "all 500ms ease",
+              }}
+            />
+
+            {/* Landing pulse for background element */}
+            <div
+              className="absolute pointer-events-none"
+              style={{
+                top: "9%",
+                left: "9%",
+                right: "9%",
+                height: "22%",
+                borderRadius: "4px",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
+                opacity: phase === 1 ? 0.6 : 0,
+                transform: phase === 1 ? "scale(1.02)" : "scale(1)",
+                transition: "all 400ms ease-out",
               }}
             />
 
@@ -257,7 +275,7 @@ const ConfusionVsClarityReel = () => {
             <div
               className="absolute"
               style={{
-                top: "42%",
+                top: "38%", // Higher for more breathing room
                 left: "10%",
                 right: "10%",
                 opacity: phase >= 2 ? 1 : 0,
@@ -265,28 +283,45 @@ const ConfusionVsClarityReel = () => {
                   ? "translateY(0)" 
                   : "translateY(12px)",
                 transition: phase >= 2
-                  ? "all 450ms cubic-bezier(0.34, 1.56, 0.64, 1)" // Gravity overshoot
+                  ? "all 450ms cubic-bezier(0.34, 1.56, 0.64, 1)"
                   : "all 450ms ease",
               }}
             >
               <p
                 style={{
-                  fontSize: "clamp(1rem, 2vw, 1.5rem)",
-                  fontWeight: 600, // Bolder
-                  color: "#ffffff", // Pure, crisp white
-                  letterSpacing: "-0.02em",
-                  lineHeight: 1.25,
+                  fontSize: "clamp(1.1rem, 2.2vw, 1.7rem)", // Larger, more dominant
+                  fontWeight: 700, // Bolder weight
+                  color: "#ffffff",
+                  letterSpacing: "-0.025em",
+                  lineHeight: 1.2,
                 }}
               >
                 Run your team. Clearly.
               </p>
             </div>
 
+            {/* Headline landing pulse */}
+            <div
+              className="absolute pointer-events-none"
+              style={{
+                top: "36%",
+                left: "8%",
+                width: "60%",
+                height: "12%",
+                borderRadius: "2px",
+                backgroundColor: "rgba(255, 255, 255, 0.04)",
+                opacity: phase === 2 ? 1 : 0,
+                transform: phase === 2 ? "scaleX(1)" : "scaleX(0.8)",
+                transformOrigin: "left",
+                transition: "all 350ms ease-out",
+              }}
+            />
+
             {/* CTA Button - BRIGHTEST element, unmistakably primary */}
             <div
               className="absolute"
               style={{
-                top: "58%",
+                top: "62%", // More breathing room from headline
                 left: "10%",
                 opacity: phase >= 3 ? 1 : 0,
                 transform: phase >= 3 
@@ -299,19 +334,35 @@ const ConfusionVsClarityReel = () => {
             >
               <div
                 style={{
-                  padding: "10px 22px",
-                  backgroundColor: "#F5D547", // Brighter, more saturated yellow
-                  color: "#0a0a0a",
-                  fontSize: "0.8rem",
+                  padding: "11px 26px", // Larger, more confident
+                  backgroundColor: "#F5D547",
+                  color: "#080808",
+                  fontSize: "0.85rem",
                   fontWeight: 600,
                   letterSpacing: "0.01em",
                   borderRadius: "3px",
-                  boxShadow: phase >= 3 ? "0 4px 20px rgba(245, 213, 71, 0.35)" : "none", // Glow to emphasize
+                  boxShadow: phase >= 3 ? "0 6px 24px rgba(245, 213, 71, 0.4)" : "none",
                 }}
               >
                 Get started
               </div>
             </div>
+
+            {/* CTA landing pulse */}
+            <div
+              className="absolute pointer-events-none"
+              style={{
+                top: "60%",
+                left: "8%",
+                width: "100px",
+                height: "40px",
+                borderRadius: "6px",
+                border: "1px solid rgba(245, 213, 71, 0.4)",
+                opacity: phase === 3 ? 0.8 : 0,
+                transform: phase === 3 ? "scale(1.15)" : "scale(1)",
+                transition: "all 400ms ease-out",
+              }}
+            />
 
             {/* Cursor - smooth, decisive movement and click */}
             <div
