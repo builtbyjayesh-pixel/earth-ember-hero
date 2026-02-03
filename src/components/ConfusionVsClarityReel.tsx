@@ -6,7 +6,6 @@ const ConfusionVsClarityReel = () => {
   const [driftOffset, setDriftOffset] = useState({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Intersection observer for triggering animation on scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -14,7 +13,7 @@ const ConfusionVsClarityReel = () => {
           setIsVisible(true);
         }
       },
-      { threshold: 0.4 }
+      { threshold: 0.3 }
     );
 
     if (sectionRef.current) {
@@ -38,19 +37,19 @@ const ConfusionVsClarityReel = () => {
     return () => clearInterval(driftInterval);
   }, [isVisible, phase]);
 
-  // Animation timeline (~8s total, calm pacing)
+  // Animation timeline (~8s total)
   useEffect(() => {
     if (!isVisible) return;
 
     const timeline = [
-      { delay: 0, phase: 1 },       // UI elements appear
-      { delay: 1200, phase: 2 },    // Headlines appear
-      { delay: 2400, phase: 3 },    // CTAs appear
-      { delay: 3600, phase: 4 },    // Cursors enter
-      { delay: 5000, phase: 5 },    // Hover/interaction
-      { delay: 6400, phase: 6 },    // Left cursor exits, right clicks
-      { delay: 7400, phase: 7 },    // Ending overlay fades in
-      { delay: 9800, phase: 8 },    // Fade out for loop
+      { delay: 0, phase: 1 },
+      { delay: 1200, phase: 2 },
+      { delay: 2400, phase: 3 },
+      { delay: 3600, phase: 4 },
+      { delay: 5000, phase: 5 },
+      { delay: 6400, phase: 6 },
+      { delay: 7400, phase: 7 },
+      { delay: 9800, phase: 8 },
     ];
 
     timeline.forEach(({ delay, phase: p }) => {
@@ -62,17 +61,18 @@ const ConfusionVsClarityReel = () => {
     <section
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ backgroundColor: "#e8e4dc" }} // Warm neutral backdrop
+      style={{ backgroundColor: "#e5e1d8" }}
     >
-      {/* Split screen container */}
-      <div className="relative w-full max-w-6xl mx-auto px-8 py-24">
+      {/* Larger container with reduced margins */}
+      <div className="relative w-full max-w-7xl mx-auto px-4 py-16">
         <div className="grid grid-cols-2 gap-1">
           {/* ========== LEFT SIDE: WEAK BUT READABLE ========== */}
           <div
-            className="relative aspect-[4/3] overflow-hidden"
+            className="relative overflow-hidden"
             style={{
-              backgroundColor: "#d8d2c4", // Warm beige
-              border: "1px solid rgba(140, 130, 110, 0.5)",
+              aspectRatio: "4 / 3.2", // Slightly taller
+              backgroundColor: "#d5cfbf",
+              border: "1px solid rgba(130, 120, 100, 0.5)",
             }}
           >
             {/* Low-energy background */}
@@ -80,51 +80,51 @@ const ConfusionVsClarityReel = () => {
               className="absolute inset-0"
               style={{
                 background:
-                  "linear-gradient(165deg, #ddd7c8 0%, #cec6b4 50%, #d5cfc0 100%)", // Dusty beige-khaki
+                  "linear-gradient(165deg, #dcd5c5 0%, #c9c1ad 50%, #d2cab8 100%)",
               }}
             />
 
-            {/* Hero block - MOST DOMINANT, oversized and prominent */}
+            {/* Hero block - MOST DOMINANT */}
             <div
               className="absolute transition-all"
               style={{
-                top: "5%",
-                left: "5%",
-                right: "5%",
-                height: "52%",
-                backgroundColor: "rgba(120, 110, 85, 0.55)", // Strong khaki presence
-                border: "3px solid rgba(100, 92, 70, 0.65)",
-                borderRadius: "4px",
-                boxShadow: "0 4px 20px rgba(90, 80, 60, 0.2)",
+                top: "4%",
+                left: "4%",
+                right: "4%",
+                height: "55%",
+                backgroundColor: "rgba(115, 105, 80, 0.6)",
+                border: "3px solid rgba(95, 87, 65, 0.7)",
+                borderRadius: "5px",
+                boxShadow: "0 6px 28px rgba(85, 75, 55, 0.25)",
                 opacity: phase >= 1 ? 1 : 0,
                 transform: phase >= 1
                   ? `translate(${driftOffset.x}px, ${driftOffset.y}px)`
-                  : "translateY(15px)",
-                transitionDuration: "900ms",
+                  : "translateY(18px)",
+                transitionDuration: "950ms",
                 transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
               }}
             />
 
-            {/* Headline - LEAST emphasized, readable but secondary to CTA */}
+            {/* Headline - LEAST emphasized */}
             <div
               className="absolute transition-all"
               style={{
-                top: "62%",
-                left: "8%",
-                right: "12%",
+                top: "64%",
+                left: "6%",
+                right: "10%",
                 opacity: phase >= 2 ? 1 : 0,
                 transform: phase >= 2
                   ? `translate(${driftOffset.x * 0.3}px, 0)`
-                  : "translateY(10px)",
-                transitionDuration: "800ms",
+                  : "translateY(12px)",
+                transitionDuration: "850ms",
                 transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
               }}
             >
               <p
                 style={{
-                  fontSize: "clamp(0.7rem, 1.2vw, 0.9rem)", // Smaller than CTA
-                  fontWeight: 400, // Lighter weight
-                  color: "rgba(75, 68, 55, 0.75)", // Readable but muted
+                  fontSize: "clamp(0.8rem, 1.4vw, 1.05rem)",
+                  fontWeight: 400,
+                  color: "rgba(70, 63, 50, 0.78)",
                   letterSpacing: "0.01em",
                   lineHeight: 1.4,
                 }}
@@ -133,87 +133,62 @@ const ConfusionVsClarityReel = () => {
               </p>
             </div>
 
-            {/* CTA Button - MORE noticeable than headline (wrong priority) */}
+            {/* CTA - MORE noticeable than headline */}
             <div
               className="absolute transition-all"
               style={{
-                top: "74%",
-                left: "8%",
-                opacity: phase >= 3 ? (phase >= 5 && phase < 6 ? 0.7 : 1) : 0,
-                transform: phase >= 3
-                  ? "translateY(0)"
-                  : "translateY(10px)",
-                transitionDuration: "700ms",
+                top: "77%",
+                left: "6%",
+                opacity: phase >= 3 ? (phase >= 5 && phase < 6 ? 0.65 : 1) : 0,
+                transform: phase >= 3 ? "translateY(0)" : "translateY(12px)",
+                transitionDuration: "750ms",
                 transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
                 cursor: "default",
               }}
             >
               <div
                 style={{
-                  padding: "10px 22px",
-                  backgroundColor: "rgba(110, 100, 75, 0.65)", // Medium contrast, prominent
-                  color: "rgba(250, 248, 242, 0.9)", // Light text, readable
-                  fontSize: "0.8rem", // Larger than headline
-                  fontWeight: 500, // Bolder than headline
+                  padding: "12px 28px",
+                  backgroundColor: "rgba(105, 95, 70, 0.7)",
+                  color: "rgba(250, 248, 240, 0.92)",
+                  fontSize: "0.95rem",
+                  fontWeight: 500,
                   letterSpacing: "0.02em",
-                  borderRadius: "3px",
-                  border: "1px solid rgba(90, 82, 60, 0.5)",
-                  transition: "all 400ms ease",
+                  borderRadius: "4px",
+                  border: "1px solid rgba(85, 77, 55, 0.55)",
+                  transition: "all 450ms ease",
                 }}
               >
                 Learn more
               </div>
             </div>
 
-            {/* Cursor - hesitant, pauses on CTA, exits without clicking */}
+            {/* Cursor - hesitant */}
             <div
               className="absolute transition-all"
               style={{
-                width: "18px",
-                height: "18px",
-                opacity: phase >= 4 && phase < 6 ? 0.85 : 0,
-                left:
-                  phase >= 5
-                    ? "38%"
-                    : phase >= 4
-                    ? "22%"
-                    : "50%",
-                top:
-                  phase >= 5
-                    ? "82%"
-                    : phase >= 4
-                    ? "73%"
-                    : "85%",
-                transitionDuration: "1100ms",
+                width: "20px",
+                height: "20px",
+                opacity: phase >= 4 && phase < 6 ? 0.88 : 0,
+                left: phase >= 5 ? "40%" : phase >= 4 ? "20%" : "50%",
+                top: phase >= 5 ? "85%" : phase >= 4 ? "76%" : "88%",
+                transitionDuration: "1150ms",
                 transitionTimingFunction: "cubic-bezier(0.4, 0.1, 0.6, 0.9)",
               }}
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.15))",
-                }}
-              >
-                <path
-                  d="M5 3L19 12L12 13L9 20L5 3Z"
-                  fill="rgba(90, 82, 65, 0.85)"
-                  stroke="rgba(70, 62, 50, 0.5)"
-                  strokeWidth="1"
-                />
+              <svg viewBox="0 0 24 24" fill="none" style={{ width: "100%", height: "100%", filter: "drop-shadow(0 1px 3px rgba(0,0,0,0.18))" }}>
+                <path d="M5 3L19 12L12 13L9 20L5 3Z" fill="rgba(85, 77, 60, 0.88)" stroke="rgba(65, 58, 45, 0.55)" strokeWidth="1" />
               </svg>
             </div>
 
             {/* Label */}
             <div
-              className="absolute bottom-4 left-4"
+              className="absolute bottom-5 left-5"
               style={{
-                fontSize: "0.55rem",
+                fontSize: "0.6rem",
                 fontWeight: 400,
-                color: "rgba(90, 82, 65, 0.6)",
-                letterSpacing: "0.1em",
+                color: "rgba(85, 77, 60, 0.6)",
+                letterSpacing: "0.12em",
                 textTransform: "uppercase",
               }}
             >
@@ -221,91 +196,88 @@ const ConfusionVsClarityReel = () => {
             </div>
           </div>
 
-          {/* ========== RIGHT SIDE: PROFESSIONAL & CLEAR ========== */}
+          {/* ========== RIGHT SIDE: PROFESSIONAL / AUTHORITY ========== */}
           <div
-            className="relative aspect-[4/3] overflow-hidden"
+            className="relative overflow-hidden"
             style={{
-              backgroundColor: "#1e2328", // Deep charcoal
-              border: "1px solid rgba(255, 255, 255, 0.08)",
+              aspectRatio: "4 / 3.2",
+              backgroundColor: "#1c2127", // Deep charcoal-blue
+              border: "1px solid rgba(255, 255, 255, 0.1)",
             }}
           >
-            {/* Professional dark neutral background */}
+            {/* Professional dark neutral */}
             <div
               className="absolute inset-0"
               style={{
-                background: "linear-gradient(180deg, #252a30 0%, #181c20 100%)",
+                background: "linear-gradient(180deg, #232930 0%, #171b1f 100%)",
               }}
             />
 
-            {/* Subtle supporting element */}
+            {/* Subtle hero block - background role only */}
             <div
               className="absolute"
               style={{
-                top: "10%",
-                left: "10%",
-                right: "10%",
-                height: "20%",
-                backgroundColor: "rgba(255, 255, 255, 0.04)",
-                border: "1px solid rgba(255, 255, 255, 0.06)",
-                borderRadius: "2px",
+                top: "8%",
+                left: "8%",
+                right: "8%",
+                height: "22%",
+                backgroundColor: "rgba(255, 255, 255, 0.025)",
+                border: "1px solid rgba(255, 255, 255, 0.04)",
+                borderRadius: "3px",
                 opacity: phase >= 1 ? 1 : 0,
-                transform: phase >= 1
-                  ? "translateY(0)"
-                  : "translateY(18px)",
-                transition: "all 800ms cubic-bezier(0.22, 1, 0.36, 1)",
+                transform: phase >= 1 ? "translateY(0)" : "translateY(20px)",
+                transition: "all 850ms cubic-bezier(0.22, 1, 0.36, 1)",
               }}
             />
 
-            {/* Headline - DOMINANT, correct hierarchy */}
+            {/* Headline - DOMINANT */}
             <div
               className="absolute"
               style={{
-                top: "40%",
-                left: "10%",
-                right: "10%",
+                top: "38%",
+                left: "8%",
+                right: "8%",
                 opacity: phase >= 2 ? 1 : 0,
-                transform: phase >= 2
-                  ? "translateY(0)"
-                  : "translateY(15px)",
-                transition: "all 750ms cubic-bezier(0.22, 1, 0.36, 1)",
+                transform: phase >= 2 ? "translateY(0)" : "translateY(18px)",
+                transition: "all 800ms cubic-bezier(0.22, 1, 0.36, 1)",
               }}
             >
               <p
                 style={{
-                  fontSize: "clamp(1.15rem, 2.3vw, 1.8rem)",
+                  fontSize: "clamp(1.35rem, 2.8vw, 2.1rem)",
                   fontWeight: 700,
                   color: "#ffffff",
-                  letterSpacing: "-0.025em",
-                  lineHeight: 1.2,
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1.15,
                 }}
               >
                 Run your team. Clearly.
               </p>
             </div>
 
-            {/* CTA Button - clear next step, minimal feedback */}
+            {/* CTA - Deep red, matte, authoritative */}
             <div
               className="absolute"
               style={{
-                top: "66%",
-                left: "10%",
+                top: "68%",
+                left: "8%",
                 opacity: phase >= 3 ? 1 : 0,
                 transform: phase >= 3
                   ? `translateY(0) scale(${phase === 6 ? 0.97 : 1})`
-                  : "translateY(12px)",
-                transition: "all 700ms cubic-bezier(0.22, 1, 0.36, 1)",
+                  : "translateY(14px)",
+                transition: "all 750ms cubic-bezier(0.22, 1, 0.36, 1)",
               }}
             >
               <div
                 style={{
-                  padding: "12px 28px",
-                  backgroundColor: "#E8C547",
-                  color: "#1a1d20",
-                  fontSize: "0.85rem",
+                  padding: "14px 34px",
+                  backgroundColor: "#7a2c38", // Deep burgundy/oxblood
+                  color: "rgba(255, 252, 248, 0.95)",
+                  fontSize: "1rem",
                   fontWeight: 600,
                   letterSpacing: "0.01em",
-                  borderRadius: "3px",
-                  opacity: phase === 6 ? 0.92 : 1,
+                  borderRadius: "4px",
+                  opacity: phase === 6 ? 0.9 : 1,
                   transition: "all 200ms ease",
                 }}
               >
@@ -313,44 +285,31 @@ const ConfusionVsClarityReel = () => {
               </div>
             </div>
 
-            {/* Cursor - smooth, decisive, clicks cleanly */}
+            {/* Cursor - smooth, decisive */}
             <div
               className="absolute"
               style={{
-                width: "18px",
-                height: "18px",
+                width: "20px",
+                height: "20px",
                 opacity: phase >= 4 ? 1 : 0,
-                left: phase >= 6 ? "18%" : "42%",
-                top: phase >= 6 ? "64%" : "75%",
-                transition: "all 700ms cubic-bezier(0.22, 1, 0.36, 1)",
+                left: phase >= 6 ? "16%" : "44%",
+                top: phase >= 6 ? "66%" : "78%",
+                transition: "all 750ms cubic-bezier(0.22, 1, 0.36, 1)",
               }}
             >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  filter: "drop-shadow(0 2px 4px rgba(0,0,0,0.4))",
-                }}
-              >
-                <path
-                  d="M5 3L19 12L12 13L9 20L5 3Z"
-                  fill="#ffffff"
-                  stroke="rgba(255, 255, 255, 0.3)"
-                  strokeWidth="0.5"
-                />
+              <svg viewBox="0 0 24 24" fill="none" style={{ width: "100%", height: "100%", filter: "drop-shadow(0 2px 5px rgba(0,0,0,0.45))" }}>
+                <path d="M5 3L19 12L12 13L9 20L5 3Z" fill="#ffffff" stroke="rgba(255, 255, 255, 0.35)" strokeWidth="0.5" />
               </svg>
             </div>
 
             {/* Label */}
             <div
-              className="absolute bottom-4 right-4"
+              className="absolute bottom-5 right-5"
               style={{
-                fontSize: "0.55rem",
+                fontSize: "0.6rem",
                 fontWeight: 500,
-                color: "rgba(255, 255, 255, 0.45)",
-                letterSpacing: "0.1em",
+                color: "rgba(255, 255, 255, 0.48)",
+                letterSpacing: "0.12em",
                 textTransform: "uppercase",
               }}
             >
@@ -364,33 +323,33 @@ const ConfusionVsClarityReel = () => {
           className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
           style={{
             opacity: phase === 7 ? 1 : phase === 8 ? 0 : 0,
-            transition: phase === 8 ? "opacity 800ms ease-out" : "opacity 600ms ease-in",
+            transition: phase === 8 ? "opacity 900ms ease-out" : "opacity 650ms ease-in",
           }}
         >
           <div
             style={{
-              backgroundColor: "rgba(30, 35, 40, 0.97)",
-              padding: "56px 80px",
+              backgroundColor: "rgba(28, 33, 39, 0.97)",
+              padding: "64px 96px",
               textAlign: "center",
-              borderRadius: "2px",
+              borderRadius: "3px",
             }}
           >
             <p
               style={{
-                fontSize: "clamp(1.15rem, 2.2vw, 1.65rem)",
+                fontSize: "clamp(1.25rem, 2.4vw, 1.85rem)",
                 fontWeight: 500,
-                color: "rgba(255, 255, 255, 0.95)",
+                color: "rgba(255, 255, 255, 0.96)",
                 letterSpacing: "0.02em",
-                marginBottom: "12px",
+                marginBottom: "14px",
               }}
             >
               Same product.
             </p>
             <p
               style={{
-                fontSize: "clamp(1.15rem, 2.2vw, 1.65rem)",
+                fontSize: "clamp(1.25rem, 2.4vw, 1.85rem)",
                 fontWeight: 400,
-                color: "rgba(255, 255, 255, 0.6)",
+                color: "rgba(255, 255, 255, 0.58)",
                 letterSpacing: "0.02em",
               }}
             >
