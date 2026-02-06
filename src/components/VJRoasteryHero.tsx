@@ -1,3 +1,5 @@
+import vjRoasteryBag from "@/assets/vj-roastery-bag.png";
+
 const VJRoasteryHero = () => {
   return (
     <section
@@ -6,18 +8,18 @@ const VJRoasteryHero = () => {
     >
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
-          {/* Generic coffee image */}
+          {/* VJ Roastery coffee bag image */}
           <div
-            className="mb-8 rounded-lg overflow-hidden"
+            className="mb-8 overflow-hidden"
             style={{
-              width: "280px",
-              height: "180px",
+              width: "220px",
+              height: "280px",
               backgroundColor: "#e8e8e8",
             }}
           >
             <img
-              src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&q=80"
-              alt="Coffee beans"
+              src={vjRoasteryBag}
+              alt="VJ Roastery coffee bag"
               className="w-full h-full object-cover"
               style={{
                 filter: "saturate(0.85) contrast(0.95)",
