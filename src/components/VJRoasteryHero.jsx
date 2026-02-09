@@ -3,9 +3,16 @@ import vjRoasteryBag from "@/assets/vj-roastery-bag.png";
 const VJRoasteryHero = () => {
   return (
     <section
-      className="py-16"
-      style={{ backgroundColor: "#f5f5f5" }}
-    >
+  style={{
+    minHeight: "95vh",
+    display: "flex",
+    alignItems: "center",
+    color: "#f5f1ec",
+    background:
+      "radial-gradient(1200px 600px at 30% 20%, rgba(255,255,255,0.06), rgba(0,0,0,0) 40%), #2b1e17",
+  }}
+>
+
       <div className="container mx-auto px-6">
         <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
           {/* VJ Roastery coffee bag image */}
@@ -27,7 +34,6 @@ const VJRoasteryHero = () => {
             />
           </div>
 
-          {/* Headline - deliberately underwhelming */}
           <h2
             style={{
               fontSize: "1.5rem",
