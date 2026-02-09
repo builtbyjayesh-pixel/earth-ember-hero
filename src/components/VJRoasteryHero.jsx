@@ -3,94 +3,87 @@ import vjRoasteryBag from "@/assets/vj-roastery-bag.png";
 const VJRoasteryHero = () => {
   return (
     <section
-  style={{
-    minHeight: "95vh",
-    display: "flex",
-    alignItems: "center",
-    color: "#f5f1ec",
-    background:
-      "radial-gradient(1200px 600px at 30% 20%, rgba(255,255,255,0.06), rgba(0,0,0,0) 40%), #2b1e17",
-  }}
->
-
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
-          {/* VJ Roastery coffee bag image */}
-          <div
-            className="mb-8 overflow-hidden"
-            style={{
-              width: "220px",
-              height: "280px",
-              backgroundColor: "#e8e8e8",
-            }}
-          >
-            <img
-              src={vjRoasteryBag}
-              alt="VJ Roastery coffee bag"
-              className="w-full h-full object-cover"
-              style={{
-                filter: "saturate(0.85) contrast(0.95)",
-              }}
-            />
-          </div>
-
+      style={{
+        minHeight: "95vh",
+        display: "flex",
+        alignItems: "flex-start",
+        paddingTop: "80px",
+        color: "#2a1d16",
+        background:
+          "radial-gradient(1200px 700px at 30% 20%, #f3e6dc 0%, #c7a58b 40%, #7a4a2e 100%)",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          gap: "80px",
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "0 32px",
+          alignItems: "flex-start",
+        }}
+      >
+        {/* LEFT: Text */}
+        <div style={{ maxWidth: "480px" }}>
           <h2
             style={{
-              fontSize: "1.5rem",
+              fontSize: "3rem",
               fontWeight: 500,
-              color: "#4a4a4a",
-              marginBottom: "12px",
-              lineHeight: 1.4,
+              lineHeight: 1.15,
+              marginBottom: "16px",
             }}
           >
-            Freshly roasted coffee, made with care
+            Freshly roasted coffee,
+            <br />
+            crafted at home.
           </h2>
 
-          {/* Subtext - same visual weight as headline */}
           <p
             style={{
-              fontSize: "1rem",
-              fontWeight: 400,
-              color: "#5a5a5a",
+              fontSize: "1.05rem",
               lineHeight: 1.6,
-              marginBottom: "24px",
+              marginBottom: "32px",
+              color: "#3b2a21",
             }}
           >
-            VJ Roastery is a home-based coffee roaster offering small-batch
-            coffee for everyday enjoyment.
+            VJ Roastery is a home-based coffee roaster offering small-batch coffee
+            for everyday enjoyment.
           </p>
 
-          {/* Two CTAs - equally weighted, no emphasis */}
-          <div className="flex gap-3">
-            <button
-              style={{
-                padding: "10px 20px",
-                fontSize: "0.9rem",
-                fontWeight: 500,
-                color: "#ffffff",
-                backgroundColor: "#6b6b6b",
-                border: "none",
-                borderRadius: "6px",
-                cursor: "pointer",
-              }}
-            >
-              Shop coffee
-            </button>
-            <button
-              style={{
-                padding: "10px 20px",
-                fontSize: "0.9rem",
-                fontWeight: 500,
-                color: "#6b6b6b",
-                backgroundColor: "transparent",
-                border: "1px solid #b0b0b0",
-                borderRadius: "6px",
-                cursor: "pointer",
-              }}
-            >
-              Learn more
-            </button>
-          </div>
+          <button
+            style={{
+              padding: "12px 28px",
+              fontSize: "0.95rem",
+              fontWeight: 500,
+              color: "#ffffff",
+              backgroundColor: "#2a1d16",
+              border: "none",
+              borderRadius: "999px",
+              cursor: "pointer",
+            }}
+          >
+            Explore our roasts
+          </button>
+        </div>
+
+        {/* RIGHT: Product image */}
+        <div
+          style={{
+            width: "360px",
+            borderRadius: "24px",
+            overflow: "hidden",
+          }}
+        >
+          <img
+            src={vjRoasteryBag}
+            alt="VJ Roastery coffee bag"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              filter: "saturate(0.95) contrast(0.98)",
+            }}
+          />
         </div>
       </div>
     </section>
