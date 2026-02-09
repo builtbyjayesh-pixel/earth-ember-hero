@@ -67,7 +67,7 @@ const VJRoasteryHero = () => {
           position: "relative",
           zIndex: 2,
           display: "flex",
-          gap: "96px",
+          gap: "56px",
           maxWidth: "1400px",
           marginLeft: "6%",
           paddingLeft: "32px",
@@ -141,13 +141,13 @@ const VJRoasteryHero = () => {
         <div
           style={{
             width: "420px",
-            marginLeft: "120px",
+            marginLeft: "32px",
             borderRadius: "32px",
             overflow: "hidden",
             opacity: mounted ? 1 : 0,
             transform: mounted
-              ? "translateX(140px) scale(1)"
-              : "translateX(220px) scale(0.94)",
+              ? "translateX(48px) scale(1)"
+              : "translateX(120px) scale(0.94)",
             transition:
               "opacity 1200ms ease, transform 1400ms cubic-bezier(0.22, 1, 0.36, 1)",
             boxShadow:
