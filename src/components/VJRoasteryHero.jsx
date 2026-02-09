@@ -8,9 +8,8 @@ const VJRoasteryHero = () => {
         display: "flex",
         alignItems: "flex-start",
         paddingTop: "80px",
-        color: "#2a1d16",
         background:
-          "radial-gradient(1200px 700px at 30% 20%, #f3e6dc 0%, #c7a58b 40%, #7a4a2e 100%)",
+          "radial-gradient(900px 600px at 20% 30%, #f4e8de 0%, #c8a389 45%, #7a4a2e 100%)",
       }}
     >
       <div
@@ -24,26 +23,35 @@ const VJRoasteryHero = () => {
         }}
       >
         {/* LEFT: Text */}
-        <div style={{ maxWidth: "480px" }}>
+        <div
+          style={{
+            maxWidth: "480px",
+            paddingLeft: "4px",
+          }}
+        >
           <h2
             style={{
-              fontSize: "3rem",
-              fontWeight: 500,
-              lineHeight: 1.15,
+              fontFamily: "'Playfair Display', serif",
+              fontSize: "3.2rem",
+              fontWeight: 600,
+              lineHeight: 1.1,
               marginBottom: "16px",
+              color: "#ffffff",
             }}
           >
-            Freshly roasted coffee,
+            Freshly roasted{" "}
+            <span style={{ color: "#f5c16c" }}>coffee</span>,
             <br />
             crafted at home.
           </h2>
 
           <p
             style={{
+              fontFamily: "Inter, system-ui, sans-serif",
               fontSize: "1.05rem",
               lineHeight: 1.6,
               marginBottom: "32px",
-              color: "#3b2a21",
+              color: "rgba(255,255,255,0.85)",
             }}
           >
             VJ Roastery is a home-based coffee roaster offering small-batch coffee
@@ -52,11 +60,12 @@ const VJRoasteryHero = () => {
 
           <button
             style={{
-              padding: "12px 28px",
+              fontFamily: "Inter, system-ui, sans-serif",
+              padding: "14px 32px",
               fontSize: "0.95rem",
-              fontWeight: 500,
-              color: "#ffffff",
-              backgroundColor: "#2a1d16",
+              fontWeight: 600,
+              color: "#2a1d16",
+              backgroundColor: "#f5c16c",
               border: "none",
               borderRadius: "999px",
               cursor: "pointer",
@@ -69,9 +78,10 @@ const VJRoasteryHero = () => {
         {/* RIGHT: Product image */}
         <div
           style={{
-            width: "360px",
-            borderRadius: "24px",
+            width: "380px",
+            borderRadius: "28px",
             overflow: "hidden",
+            transform: "translateY(12px)",
           }}
         >
           <img
