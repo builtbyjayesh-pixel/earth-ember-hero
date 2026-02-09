@@ -54,7 +54,7 @@ const VJRoasteryHero = () => {
             coffee for everyday enjoyment.
           </p>
 
-          {/* Two CTAs - equally weighted, no emphasis */}
+          
           <div className="flex gap-3">
             <button
               style={{
