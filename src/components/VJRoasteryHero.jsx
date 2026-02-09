@@ -7,13 +7,13 @@ const VJRoasteryHero = () => {
   const [pressed, setPressed] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 150);
+    const t = setTimeout(() => setMounted(true), 200);
     return () => clearTimeout(t);
   }, []);
 
   const buttonStyle = {
     fontFamily: "Inter, system-ui, sans-serif",
-    padding: "14px 36px",
+    padding: "14px 38px",
     fontSize: "0.95rem",
     fontWeight: 600,
     color: "#1c0f0a",
@@ -28,12 +28,13 @@ const VJRoasteryHero = () => {
     transform: pressed
       ? "translateY(0)"
       : hovered
-      ? "translateY(-2px)"
+      ? "translateY(-3px)"
       : "translateY(0)",
     boxShadow: hovered
-      ? "0 16px 36px rgba(0,0,0,0.4)"
-      : "0 12px 26px rgba(0,0,0,0.28)",
-    transition: "all 260ms ease",
+      ? "0 18px 42px rgba(0,0,0,0.45)"
+      : "0 14px 30px rgba(0,0,0,0.32)",
+    transition:
+      "background-color 260ms ease, transform 260ms ease, box-shadow 260ms ease",
   };
 
   return (
@@ -44,7 +45,7 @@ const VJRoasteryHero = () => {
         display: "flex",
         alignItems: "center",
         background:
-          "radial-gradient(1000px 650px at 18% 38%, #4b2a1f 0%, #2f1a12 48%, #1c0f0a 100%)",
+          "radial-gradient(1100px 700px at 20% 40%, #4b2a1f 0%, #2f1a12 48%, #1c0f0a 100%)",
         overflow: "hidden",
       }}
     >
@@ -60,33 +61,35 @@ const VJRoasteryHero = () => {
         }}
       />
 
+      {/* CONTENT WRAPPER */}
       <div
         style={{
           position: "relative",
           zIndex: 2,
           display: "flex",
-          gap: "72px",
-          maxWidth: "1320px",
-          marginLeft: "3%",
-          padding: "0 32px",
+          gap: "96px",
+          maxWidth: "1400px",
+          marginLeft: "6%",
+          paddingLeft: "32px",
           alignItems: "center",
         }}
       >
-        {/* LEFT — TEXT */}
+        {/* LEFT — TEXT (LOCKED POSITION) */}
         <div
           style={{
-            maxWidth: "540px",
+            maxWidth: "560px",
             opacity: mounted ? 1 : 0,
             transform: mounted
               ? "translateY(0)"
-              : "translateY(20px)",
-            transition: "all 900ms ease",
+              : "translateY(26px)",
+            transition:
+              "opacity 900ms ease, transform 900ms ease",
           }}
         >
           <h1
             style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: "4.1rem",
+              fontSize: "4.2rem",
               fontWeight: 700,
               lineHeight: 1.04,
               marginBottom: "22px",
@@ -104,7 +107,7 @@ const VJRoasteryHero = () => {
               fontFamily: "Inter, system-ui, sans-serif",
               fontSize: "1.05rem",
               lineHeight: 1.65,
-              marginBottom: "44px",
+              marginBottom: "46px",
               color: "rgba(255,255,255,0.85)",
             }}
           >
@@ -116,7 +119,7 @@ const VJRoasteryHero = () => {
             style={{
               opacity: mounted ? 1 : 0,
               transition: "opacity 700ms ease",
-              transitionDelay: "400ms",
+              transitionDelay: "420ms",
             }}
           >
             <button
@@ -134,21 +137,23 @@ const VJRoasteryHero = () => {
           </div>
         </div>
 
-        {/* RIGHT — IMAGE */}
+        {/* RIGHT — IMAGE (PUSHED HARD RIGHT + CLEAR ANIMATION) */}
         <div
           style={{
-            width: "380px",
-            borderRadius: "28px",
+            width: "420px",
+            marginLeft: "120px",
+            borderRadius: "32px",
             overflow: "hidden",
             opacity: mounted ? 1 : 0,
             transform: mounted
-              ? "translateX(48px) scale(1)"
-              : "translateX(96px) scale(0.96)",
-            transition: "all 1100ms ease",
+              ? "translateX(140px) scale(1)"
+              : "translateX(220px) scale(0.94)",
+            transition:
+              "opacity 1200ms ease, transform 1400ms cubic-bezier(0.22, 1, 0.36, 1)",
             boxShadow:
-              "0 48px 90px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.04)",
+              "0 60px 120px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.04)",
             background:
-              "radial-gradient(65% 65% at 50% 50%, rgba(245,193,108,0.2), transparent 70%)",
+              "radial-gradient(70% 70% at 50% 50%, rgba(245,193,108,0.18), transparent 70%)",
           }}
         >
           <img
