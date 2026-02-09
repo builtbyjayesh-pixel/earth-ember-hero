@@ -6,36 +6,31 @@ const VJRoasteryHero = () => {
       style={{
         minHeight: "95vh",
         display: "flex",
-        alignItems: "flex-start",
-        paddingTop: "80px",
+        alignItems: "center",
+        paddingTop: "60px",
         background:
-          "radial-gradient(900px 600px at 20% 30%, #f4e8de 0%, #c8a389 45%, #7a4a2e 100%)",
+          "radial-gradient(900px 600px at 25% 35%, #4b2a1f 0%, #2f1a12 45%, #1c0f0a 100%)",
       }}
     >
       <div
         style={{
           display: "flex",
-          gap: "80px",
+          gap: "72px",
           maxWidth: "1200px",
           margin: "0 auto",
           padding: "0 32px",
-          alignItems: "flex-start",
+          alignItems: "center",
         }}
       >
         {/* LEFT: Text */}
-        <div
-          style={{
-            maxWidth: "480px",
-            paddingLeft: "4px",
-          }}
-        >
+        <div style={{ maxWidth: "480px" }}>
           <h2
             style={{
               fontFamily: "'Playfair Display', serif",
-              fontSize: "3.2rem",
-              fontWeight: 600,
-              lineHeight: 1.1,
-              marginBottom: "16px",
+              fontSize: "3.4rem",
+              fontWeight: 700,
+              lineHeight: 1.05,
+              marginBottom: "20px",
               color: "#ffffff",
             }}
           >
@@ -50,7 +45,7 @@ const VJRoasteryHero = () => {
               fontFamily: "Inter, system-ui, sans-serif",
               fontSize: "1.05rem",
               lineHeight: 1.6,
-              marginBottom: "32px",
+              marginBottom: "36px",
               color: "rgba(255,255,255,0.85)",
             }}
           >
@@ -61,10 +56,10 @@ const VJRoasteryHero = () => {
           <button
             style={{
               fontFamily: "Inter, system-ui, sans-serif",
-              padding: "14px 32px",
+              padding: "14px 34px",
               fontSize: "0.95rem",
               fontWeight: 600,
-              color: "#2a1d16",
+              color: "#1c0f0a",
               backgroundColor: "#f5c16c",
               border: "none",
               borderRadius: "999px",
@@ -78,10 +73,10 @@ const VJRoasteryHero = () => {
         {/* RIGHT: Product image */}
         <div
           style={{
-            width: "380px",
+            width: "340px",
             borderRadius: "28px",
             overflow: "hidden",
-            transform: "translateY(12px)",
+            transform: "translateY(8px)",
           }}
         >
           <img
