@@ -142,8 +142,8 @@ const VJRoasteryHero = () => {
             overflow: "hidden",
             opacity: mounted ? 1 : 0,
             transform: mounted
-              ? "translateX(28px) scale(1)"
-              : "translateX(64px) scale(0.96)",
+              ? "translateX(48px) scale(1)"
+              : "translateX(96px) scale(0.96)",
             transition: "all 1100ms ease",
             boxShadow:
               "0 48px 90px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.04)",
