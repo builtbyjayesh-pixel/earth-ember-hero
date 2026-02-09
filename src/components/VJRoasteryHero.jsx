@@ -7,7 +7,7 @@ const VJRoasteryHero = () => {
   const [pressed, setPressed] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setMounted(true), 200);
+    const t = setTimeout(() => setMounted(true), 700); // slower start
     return () => clearTimeout(t);
   }, []);
 
@@ -34,7 +34,7 @@ const VJRoasteryHero = () => {
       ? "0 18px 42px rgba(0,0,0,0.45)"
       : "0 14px 30px rgba(0,0,0,0.32)",
     transition:
-      "background-color 260ms ease, transform 260ms ease, box-shadow 260ms ease",
+      "background-color 320ms ease, transform 320ms ease, box-shadow 320ms ease",
   };
 
   return (
@@ -74,16 +74,16 @@ const VJRoasteryHero = () => {
           alignItems: "center",
         }}
       >
-        {/* LEFT — TEXT (LOCKED POSITION) */}
+        {/* LEFT — TEXT */}
         <div
           style={{
             maxWidth: "560px",
             opacity: mounted ? 1 : 0,
             transform: mounted
               ? "translateY(0)"
-              : "translateY(26px)",
+              : "translateY(32px)",
             transition:
-              "opacity 900ms ease, transform 900ms ease",
+              "opacity 1600ms ease, transform 1800ms cubic-bezier(0.22, 1, 0.36, 1)",
           }}
         >
           <h1
@@ -118,8 +118,8 @@ const VJRoasteryHero = () => {
           <div
             style={{
               opacity: mounted ? 1 : 0,
-              transition: "opacity 700ms ease",
-              transitionDelay: "420ms",
+              transition: "opacity 1200ms ease",
+              transitionDelay: "600ms",
             }}
           >
             <button
@@ -137,7 +137,7 @@ const VJRoasteryHero = () => {
           </div>
         </div>
 
-        {/* RIGHT — IMAGE (PUSHED HARD RIGHT + CLEAR ANIMATION) */}
+        {/* RIGHT — IMAGE */}
         <div
           style={{
             width: "420px",
@@ -146,10 +146,10 @@ const VJRoasteryHero = () => {
             overflow: "hidden",
             opacity: mounted ? 1 : 0,
             transform: mounted
-              ? "translateX(48px) scale(1)"
-              : "translateX(120px) scale(0.94)",
+              ? "translateX(32px) scale(1)"
+              : "translateX(96px) scale(0.96)",
             transition:
-              "opacity 1200ms ease, transform 1400ms cubic-bezier(0.22, 1, 0.36, 1)",
+              "opacity 1800ms ease, transform 2200ms cubic-bezier(0.22, 1, 0.36, 1)",
             boxShadow:
               "0 60px 120px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(255,255,255,0.04)",
             background:
