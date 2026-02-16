@@ -8,6 +8,7 @@ import StudioPhilosophySection from "@/components/StudioPhilosophySection";
 import ClarityHeroSection from "@/components/ClarityHeroSection";
 import ConfusionVsClarityReel from "@/components/ConfusionVsClarityReel";
 import VJRoasteryHero from "@/components/VJRoasteryHero";
+import VoidSupplyHero from "@/components/VoidSupplyHero";
 
 const Index = () => {
   return (
@@ -22,6 +23,7 @@ const Index = () => {
       <ClarityHeroSection />
       <ConfusionVsClarityReel />
       <VJRoasteryHero />
+      <VoidSupplyHero />
     </main>
   );
 };
